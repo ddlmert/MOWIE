@@ -22,27 +22,29 @@ Expires: 2 September 2024                                     Y. R. Yang
 
 Abstract
 
-   With the deployment of 5G networks, cloud-based interactive services
-   such as cloud gaming have gained substantial attention.  To ensure
-   users' quality of experience (QoE), a cloud interactive service may
-   require not only high bandwidth (e.g., high-resolution media
-   transmission) but also low delay (e.g., low latency and low lagging).
-   However, the quality perceived by a user with mobile and wireless
-   device may vary, as a function of many factors, and unhandled changes
-   can substantially compromise the user's QoE.  In this document, we
-   investigate network-aware applications (NAA), which realize cloud-
-   based interactive services with improved QoE, by efficient
-   utilization of a solution named Mobile and Wireless Information
-   Exposure (MoWIE).  In particular, this document demonstrates, through
-   realistic evaluations, that mobile network information such as MCS
-   (Modulation and Coding Scheme) can effectively expose the dynamicity
-   of the underlying network and can be made available to applications
-   through MoWIE; using such an information, the applications can then
-   adapt key control knobs such as media codec schemes, encapsulation,
-   and application layer processing to minimize QoE distortion.  Based
-   on the evaluations, we discuss how the MoWIE features can define
-   extensions of the ALTO protocol, to expose more lower-layer and finer
-   grain network dynamics.
+   TODO: ADD ABSTRACT ONCE DRAFT IS COMPLETE - BASE OFF OF THE
+   FOLLOWING: With the deployment of 5G networks, cloud-based
+   interactive services such as cloud gaming have gained substantial
+   attention.  To ensure users' quality of experience (QoE), a cloud
+   interactive service may require not only high bandwidth (e.g., high-
+   resolution media transmission) but also low delay (e.g., low latency
+   and low lagging).  However, the quality perceived by a user with
+   mobile and wireless device may vary, as a function of many factors,
+   and unhandled changes can substantially compromise the user's QoE.
+   In this document, we investigate network-aware applications (NAA),
+   which realize cloud-based interactive services with improved QoE, by
+   efficient utilization of a solution named Mobile and Wireless
+   Information Exposure (MoWIE).  In particular, this document
+   demonstrates, through realistic evaluations, that mobile network
+   information such as MCS (Modulation and Coding Scheme) can
+   effectively expose the dynamicity of the underlying network and can
+   be made available to applications through MoWIE; using such an
+   information, the applications can then adapt key control knobs such
+   as media codec schemes, encapsulation, and application layer
+   processing to minimize QoE distortion.  Based on the evaluations, we
+   discuss how the MoWIE features can define extensions of the ALTO
+   protocol, to expose more lower-layer and finer grain network
+   dynamics.
 
 Status of This Memo
 
@@ -105,7 +107,7 @@ Table of Contents
 1.  Introduction of Network-aware Applications
 
    With the deployment of 5G networks
-   [draft-ietf-dmm-5g-uplane-analysis], more applications are available
+   [draft-ietf-dmm-5g-uplane-analysis] , more applications are available
    as remote cloud-based applications (e.g., cloud AR/VR/MR).  Many
    conventional interactive, daily business applications are also
    becoming widely used as cloud applications, with the help of mobile
@@ -157,10 +159,10 @@ Table of Contents
    3GPP, many IP-based QoS mechanisms are used.  For example, ECN
    [RFC3168] has been supported by the 4G radio station (eNB) to provide
    CE(Congestion Encountered) information to the IMS application to
-   perform Adaptive Bitrate (ABR) [TS26.114].  The application can
+   perform Adaptive Bitrate (ABR) [TS26.114] . The application can
    downgrade the bit rate after receiving the CE indication, but does
    not know the exact bit rate to be selected.  DSCP [RFC2474] is used
-   to identify the QoS class and paging strategy [TS23.501], but
+   to identify the QoS class and paging strategy [TS23.501] , but
    typically the application cannot dynamically change the DSCP to
    improve the bit rate based on the network status by mapping DSCP with
    4G QCI or 5G 5QI can be a good approach to realize end-to-end QoS.
@@ -174,16 +176,16 @@ Table of Contents
 
    There are some early works on network status exposure to TCP server,
    which may also indirectly impact application layer optimization, but
-   did not consider 5G networks [Sprecher_mobile], [flinck_mobile] In 5G
-   cellular networks, network capability exposure has been specified to
-   allow the 5G system (5GS) to expose user device location and network
-   status towards the 3rd party application servers modeled as AF
-   (Application Function) [TS23.501].  In such a case, the AF can
+   did not consider 5G networks [Sprecher_mobile] , [flinck_mobile] In
+   5G cellular networks, network capability exposure has been specified
+   to allow the 5G system (5GS) to expose user device location and
+   network status towards the 3rd party application servers modeled as
+   AF (Application Function) [TS23.501] . In such a case, the AF can
    request the 5GS to establish a dedicated QoS Flow to transport an IP
    flow with the AF-provided QoS requirements.  Via certain
    measurements, network internal status including congestion can be
    exposed and optimization can be carried out for the cellular network
-   [PBECC].
+   [PBECC] .
 
    5G also can provide QNC (QoS Notification Control) to an AF if the
    GBR(Guaranteed Bitrate) of the established GBR QoS Flow cannot be
@@ -315,7 +317,7 @@ Table of Contents
    that only small fovea region captures most visual attention at high
    resolution, while other peripheral regions receive little attention
    at low resolution.  And we call those regions which attract users
-   most, the regions of interest (ROI)[Fahad].
+   most, the regions of interest (ROI)[Fahad] .
 
    To predict human attention or ROI, saliency detection has been widely
    studied in recent years, with applications in object recognition,
@@ -351,7 +353,7 @@ Table of Contents
    quality.
 
    Applications such as video live streaming and cloud gaming employ
-   adaptive bitrate (ABR) algorithms to optimize user QoE [MPC][CS2P].
+   adaptive bitrate (ABR) algorithms to optimize user QoE [MPC] [CS2P] .
 
    Despite the abundance of recently proposed schemes, state-of-the-art
    AI based ABR algorithms suffer from a key limitation.  They use fixed
@@ -459,13 +461,13 @@ Table of Contents
    *  the per-UE PDCP (Packet Data Convergence Protocol) buffer status;
 
    The network information listed here can also be found in 3GPP (PRB
-   [TS38.211], cell load [TS38.300] PDCP for 5G [TS38.323] RSRP, RSRQ,
-   RSSI [TS38.331], MCS, CQI [TS38.214], The number of packets occupied
-   in PDCP buffer, the number of Downlink PDCP SDU packets, the number
-   of PDCP SDU packets lost, the per-UE PDCP buffer status [TS38.323]),
-   to demonstrate the potential benefits of MoWIE for network-
-   application integration over cellular network.  Figure 3-1 and
-   Figure 3-2 list the data types correponding to the cell-level
+   [TS38.211] , cell load [TS38.300] PDCP for 5G [TS38.323] RSRP, RSRQ,
+   RSSI [TS38.331] , MCS, CQI [TS38.214] , The number of packets
+   occupied in PDCP buffer, the number of Downlink PDCP SDU packets, the
+   number of PDCP SDU packets lost, the per-UE PDCP buffer status
+   [TS38.323] ), to demonstrate the potential benefits of MoWIE for
+   network-application integration over cellular network.  Figure 3-1
+   and Figure 3-2 list the data types correponding to the cell-level
    information and UE-level information, respectively.
 
                +----------------------+--------------------------+
@@ -555,7 +557,7 @@ Table of Contents
    investigate the impact of network perception.
 
    Saliency detection method has successfully reduced the size of videos
-   and improve the QoE of users in video downloading [Saliency].
+   and improve the QoE of users in video downloading [Saliency] .
 
    However, it is not effective when applied to real-time interactive
    streaming such as cloud gaming.
@@ -703,8 +705,8 @@ Table of Contents
    gNB, and the gNB has the real-time information of radio link quality
    statistics and layer 1 and layer 2 operation information, NAA
    mechanism can expose rich information to upper layer, e.g., it is
-   capable to differentiate packet loss and congestion [MengZ], which is
-   very helpful to the applications in practice.
+   capable to differentiate packet loss and congestion [MengZ] , which
+   is very helpful to the applications in practice.
 
    In order to compare the cases with and without NAA, the cloud gaming
    test environment is setup with 1080p resolution and around 20Mbps
@@ -724,7 +726,7 @@ Table of Contents
    and user distribution.
 
    Test method: To simplify to comparison, we just use the MCS (MCS
-   index) information derived from the gNB [TS38.214].  The information
+   index) information derived from the gNB [TS38.214] .  The information
    is provided directly to the application, and the application then
    adjusts the bit rate according to this information.  Here, MCS index
    shows the modulation (e.g.  QPSK, 16QAM,...) and the coding rate used
@@ -833,7 +835,7 @@ Table of Contents
    tool to support exposure of 5G network status information.  MoWIE can
    also support QoS prediction technologies which is being applied to
    5G-enabled automated driving which is being developed in 5GAA
-   [PQoS_white_paper], this solution can use network information
+   [PQoS_white_paper] , this solution can use network information
    exposure to predict the future network changes to the application
    layer in order to be prepared for such changes and make adaptations
    in application layer to improve the QoE of users.  There have been
@@ -846,7 +848,7 @@ Table of Contents
    take measures to adapt according to the network status information.
    The network information can include the radio network statistics as
    has been elaborated in Section 4.1 and also the parameters specified
-   in [ALTO_METRICS].  In Section 4.1, the parameters which MoWIE
+   in [ALTO_METRICS] . In Section 4.1, the parameters which MoWIE
    proposes to expose can provide real-time status and rich information
    about the wireless link which can be utilized by AI-ML (Machine
    Learning) algorithms to predict the available network resources in
@@ -939,15 +941,15 @@ Table of Contents
       integrate fundamental overhead, stability, and reliability
       mechanisms.
 
-   *  Cost metrics considerations.  In [ALTO_METRICS], some cost metrics
-      are being standardized including throughput/bit rate, latency,
-      priority, error rate, jitter.  These parameters can be linked with
-      cost metrics in 5G network entities like network exposure function
-      (NEF) [TS23.501] or application function (AF) [TS23.501].  NEF or
-      AF, which act as ALTO Clients, utilizing the network information
-      exposure capability provided by 3GPP standards, can request to
-      expose some of the proposed parameters with consideration of the
-      ALTO performance metrics.
+   *  Cost metrics considerations.  In [ALTO_METRICS] , some cost
+      metrics are being standardized including throughput/bit rate,
+      latency, priority, error rate, jitter.  These parameters can be
+      linked with cost metrics in 5G network entities like network
+      exposure function (NEF) [TS23.501] or application function (AF)
+      [TS23.501] .  NEF or AF, which act as ALTO Clients, utilizing the
+      network information exposure capability provided by 3GPP
+      standards, can request to expose some of the proposed parameters
+      with consideration of the ALTO performance metrics.
 
    With the better utilization of the 5G network, IETF ALTO can well
    benefit from MoWIE architecture and QoE for the use cases of NAA
@@ -958,7 +960,7 @@ Table of Contents
    implementation in the AF.  It can receive the cellular-based network
    information through interaction with NEF, identify the ALTO server
    using ALTO service discovery, and request available ALTO information
-   prepared by the ALTO server using ALTO Protocol [RFC7285].  The ALTO
+   prepared by the ALTO server using ALTO Protocol [RFC7285] . The ALTO
    server can be implemented in other places through ALTO architecture
    and can interact with the third parties (e.g.  Content providers) via
    external interfaces.  Furthermore, the ALTO server can aggregate
@@ -967,9 +969,9 @@ Table of Contents
    of other systems include (but are not limited to) static network
    configuration databases, dynamic network information, routing
    protocols, provisioning policies, and interfaces to outside parties
-   [RFC7285].  Please note that these components shown in Figure 5-1 are
-   out of IETF ALTO scope and are just for completeness to put here.  As
-   a result, the ALTO Client can perform ALTO Service Discovery and
+   [RFC7285] .  Please note that these components shown in Figure 5-1
+   are out of IETF ALTO scope and are just for completeness to put here.
+   As a result, the ALTO Client can perform ALTO Service Discovery and
    interact with the ALTO server via ALTO Protocol to get the ALTO
    information and ALTO metrics regarding the proposed parameters with
    the help of MoWIE that can be updated dynamically based on network

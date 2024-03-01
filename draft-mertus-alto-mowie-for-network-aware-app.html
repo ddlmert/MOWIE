@@ -14,6 +14,8 @@
 <meta content="S. Randriamasy" name="author">
 <meta content="
        
+      TODO: ADD ABSTRACT ONCE DRAFT IS COMPLETE - BASE OFF OF THE FOLLOWING:
+
    With the deployment of 5G networks, cloud-based
    interactive services such as cloud gaming have gained substantial
    attention. To ensure users' quality of experience (QoE), a cloud interactive
@@ -1110,6 +1112,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">
+      TODO: ADD ABSTRACT ONCE DRAFT IS COMPLETE - BASE OFF OF THE FOLLOWING:
+
    With the deployment of 5G networks, cloud-based
    interactive services such as cloud gaming have gained substantial
    attention. To ensure users' quality of experience (QoE), a cloud interactive
@@ -1269,7 +1273,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction-of-network-awa" class="section-name selfRef">Introduction of Network-aware Applications</a>
       </h2>
 <p id="section-1-1">
-   With the deployment of 5G networks <span>[<a href="#draft-ietf-dmm-5g-uplane-analysis" class="cite xref">draft-ietf-dmm-5g-uplane-analysis</a>]</span>, more
+   With the deployment of 5G networks <span>[<a href="#draft-ietf-dmm-5g-uplane-analysis" class="cite xref">draft-ietf-dmm-5g-uplane-analysis</a>]</span>
+, more
    applications are available as remote cloud-based
    applications (e.g., cloud AR/VR/MR).
    Many conventional interactive, daily business applications are also becoming widely used
@@ -1313,35 +1318,44 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-1-3">
    The 3GPP mobile networks are always adhering to standard solutions to get network
    dynamic indicators that can be used by applications.  In 3GPP, many IP-based QoS mechanisms are used. For example,
-   ECN <span>[<a href="#RFC3168" class="cite xref">RFC3168</a>]</span> has been
+   ECN <span>[<a href="#RFC3168" class="cite xref">RFC3168</a>]</span>
+ has been
    supported by the 4G radio station (eNB) to provide CE(Congestion
    Encountered) information to the IMS application to perform
-   Adaptive Bitrate (ABR) <span>[<a href="#TS26.114" class="cite xref">TS26.114</a>]</span>. The application can downgrade the
+   Adaptive Bitrate (ABR) <span>[<a href="#TS26.114" class="cite xref">TS26.114</a>]</span>
+. The application can downgrade the
    bit rate after receiving the CE indication, but does not know the exact
-   bit rate to be selected. DSCP <span>[<a href="#RFC2474" class="cite xref">RFC2474</a>]</span> is used to identify the
-   QoS class and paging strategy <span>[<a href="#TS23.501" class="cite xref">TS23.501</a>]</span>, but typically the application
+   bit rate to be selected. DSCP <span>[<a href="#RFC2474" class="cite xref">RFC2474</a>]</span>
+ is used to identify the
+   QoS class and paging strategy <span>[<a href="#TS23.501" class="cite xref">TS23.501</a>]</span>
+, but typically the application
    cannot dynamically change the DSCP to improve the bit rate based on the
    network status by mapping DSCP with 4G QCI or 5G 5QI can be a good approach to realize end-to-end QoS.
-   DASH <span>[<a href="#MPEGDASH" class="cite xref">MPEGDASH</a>]</span> is an MPEG standard widely used for
+   DASH <span>[<a href="#MPEGDASH" class="cite xref">MPEGDASH</a>]</span>
+ is an MPEG standard widely used for
    the applications to detect the throughput of the network based on the
    current throughput and buffering states and adaptively select the
    next segment of video streaming with a suitable bitrate in order to
-   avoid re-buffering. SAND-DASH <span>[<a href="#TS26.247" class="cite xref">TS26.247</a>]</span> defines the mechanism
+   avoid re-buffering. SAND-DASH <span>[<a href="#TS26.247" class="cite xref">TS26.247</a>]</span>
+ defines the mechanism
    that the network/server can provide available throughput to the
    applications; in such case, the better bitrate can be selected by DASH
    application.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">
    There are some early works on network status exposure to TCP server, which may
-   also indirectly impact application layer optimization, but did not consider 5G networks <span>[<a href="#Sprecher_mobile" class="cite xref">Sprecher_mobile</a>]</span>,
-   <span>[<a href="#flinck_mobile" class="cite xref">flinck_mobile</a>]</span>
+   also indirectly impact application layer optimization, but did not consider 5G networks <span>[<a href="#Sprecher_mobile" class="cite xref">Sprecher_mobile</a>]</span>
+,
+<span>[<a href="#flinck_mobile" class="cite xref">flinck_mobile</a>]</span>
    In 5G cellular networks, network capability exposure has been
    specified to allow the 5G system (5GS) to expose user device
    location and network status towards the 3rd party application servers
-   modeled as AF (Application Function) <span>[<a href="#TS23.501" class="cite xref">TS23.501</a>]</span>. In such a case, the AF
+   modeled as AF (Application Function) <span>[<a href="#TS23.501" class="cite xref">TS23.501</a>]</span>
+. In such a case, the AF
    can request the 5GS to establish a dedicated QoS Flow to transport an
    IP flow with the AF-provided QoS requirements. Via certain measurements,
    network internal status including congestion can be exposed and optimization
-   can be carried out for the cellular network <span>[<a href="#PBECC" class="cite xref">PBECC</a>]</span>.<a href="#section-1-4" class="pilcrow">¶</a></p>
+   can be carried out for the cellular network <span>[<a href="#PBECC" class="cite xref">PBECC</a>]</span>
+.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">
    5G also can
    provide QNC (QoS Notification Control) to an AF if the
@@ -1500,11 +1514,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-video-compression-based-on-" class="section-name selfRef">Video Compression Based on ROI (Region of Interest)</a>
         </h3>
 <p id="section-3.1-1">
-   A foveated mechanism <span>[<a href="#Saccadic" class="cite xref">Saccadic</a>]</span> in the Human Visual System indicates
+   A foveated mechanism <span>[<a href="#Saccadic" class="cite xref">Saccadic</a>]</span>
+ in the Human Visual System indicates
    that only small fovea region captures most visual attention at high
    resolution, while other peripheral regions receive little attention
    at low resolution.  And we call those regions which attract users
-   most, the regions of interest (ROI)<span>[<a href="#Fahad" class="cite xref">Fahad</a>]</span>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+   most, the regions of interest (ROI)<span>[<a href="#Fahad" class="cite xref">Fahad</a>]</span>
+.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">
    To predict human attention or ROI, saliency detection has been widely
    studied in recent years, with applications in object
@@ -1545,7 +1561,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
    picture quality.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">
    Applications such as video live streaming and cloud gaming employ
-   adaptive bitrate (ABR) algorithms to optimize user QoE <span>[<a href="#MPC" class="cite xref">MPC</a>]</span><span>[<a href="#CS2P" class="cite xref">CS2P</a>]</span>.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+   adaptive bitrate (ABR) algorithms to optimize user QoE <span>[<a href="#MPC" class="cite xref">MPC</a>]</span>
+          <span>[<a href="#CS2P" class="cite xref">CS2P</a>]</span>
+.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">
    Despite the abundance of recently proposed schemes, state-of-the-art
    AI based ABR algorithms suffer from a key limitation.  They use fixed
@@ -1555,7 +1573,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
    conditions and QoE objectives.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">
    A reinforcement learning based ABR algorithm named Pensieve was
-   proposed <span>[<a href="#Hongzi" class="cite xref">Hongzi</a>]</span> recently.  Unlike traditional ABR algorithms that
+   proposed <span>[<a href="#Hongzi" class="cite xref">Hongzi</a>]</span>
+ recently.  Unlike traditional ABR algorithms that
    use fixed heuristics or inaccurate system models, Pensieve's ABR
    algorithms are generated using observations of the resulting
    performance of past decisions across a large number of video
@@ -1677,10 +1696,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
         </ul>
 <p id="section-4.1-10">
-   The network information listed here can also be found in 3GPP (PRB <span>[<a href="#TS38.211" class="cite xref">TS38.211</a>]</span>, cell load <span>[<a href="#TS38.300" class="cite xref">TS38.300</a>]</span>
-   PDCP for 5G <span>[<a href="#TS38.323" class="cite xref">TS38.323</a>]</span>  RSRP, RSRQ, RSSI <span>[<a href="#TS38.331" class="cite xref">TS38.331</a>]</span>, MCS, CQI <span>[<a href="#TS38.214" class="cite xref">TS38.214</a>]</span>,
+   The network information listed here can also be found in 3GPP (PRB <span>[<a href="#TS38.211" class="cite xref">TS38.211</a>]</span>
+, cell load <span>[<a href="#TS38.300" class="cite xref">TS38.300</a>]</span>
+   PDCP for 5G <span>[<a href="#TS38.323" class="cite xref">TS38.323</a>]</span>
+  RSRP, RSRQ, RSSI <span>[<a href="#TS38.331" class="cite xref">TS38.331</a>]</span>
+, MCS, CQI <span>[<a href="#TS38.214" class="cite xref">TS38.214</a>]</span>
+,
    The number of packets occupied in PDCP buffer, the number of Downlink PDCP SDU packets, the number of PDCP SDU packets lost,
-   the per-UE PDCP buffer status <span>[<a href="#TS38.323" class="cite xref">TS38.323</a>]</span>), to demonstrate the potential benefits of MoWIE for network-application
+   the per-UE PDCP buffer status <span>[<a href="#TS38.323" class="cite xref">TS38.323</a>]</span>
+), to demonstrate the potential benefits of MoWIE for network-application
    integration over cellular network. Figure 3-1 and Figure 3-2 list the data types correponding
    to the cell-level information and UE-level information, respectively.<a href="#section-4.1-10" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.1-11">
@@ -1792,7 +1816,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
    investigate the impact of network perception.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.4-2">
    Saliency detection method has successfully reduced the size of videos
-   and improve the QoE of users in video downloading <span>[<a href="#Saliency" class="cite xref">Saliency</a>]</span>.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+   and improve the QoE of users in video downloading <span>[<a href="#Saliency" class="cite xref">Saliency</a>]</span>
+.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 <p id="section-4.4-3">
    However, it is not effective when applied to real-time interactive
    streaming such as cloud gaming.<a href="#section-4.4-3" class="pilcrow">¶</a></p>
@@ -1948,7 +1973,8 @@ Conclusion:
    gNB, and the gNB has the real-time information of radio link quality
    statistics and layer 1 and layer 2 operation information, NAA
    mechanism can expose rich information to upper layer, e.g., it is
-   capable to differentiate packet loss and congestion <span>[<a href="#MengZ" class="cite xref">MengZ</a>]</span>, which is very
+   capable to differentiate packet loss and congestion <span>[<a href="#MengZ" class="cite xref">MengZ</a>]</span>
+, which is very
    helpful to the applications in practice.<a href="#section-4.5-4" class="pilcrow">¶</a></p>
 <p id="section-4.5-5">
    In order to compare the cases with and without NAA, the cloud gaming
@@ -1969,7 +1995,8 @@ Conclusion:
    and user distribution.<a href="#section-4.5-9" class="pilcrow">¶</a></p>
 <p id="section-4.5-10">
    Test method: To simplify to comparison, we just use the MCS (MCS
-   index) information derived from the gNB <span>[<a href="#TS38.214" class="cite xref">TS38.214</a>]</span>.  The information
+   index) information derived from the gNB <span>[<a href="#TS38.214" class="cite xref">TS38.214</a>]</span>
+.  The information
    is provided directly to the application, and the application then
    adjusts the bit rate according to this information.  Here, MCS index
    shows the modulation (e.g.  QPSK, 16QAM,...) and the coding rate used
@@ -2087,7 +2114,8 @@ Conclusion:
     interaction and collaboration between applications and networks by improving the ability of the network information
     exposure especially for XR and multimedia services. MoWIE is closedly related to this study as it can be a tool to
     support exposure of 5G network status information. MoWIE can also support QoS prediction technologies which is
-    being applied to 5G-enabled automated driving which is being developed in 5GAA <span>[<a href="#PQoS_white_paper" class="cite xref">PQoS_white_paper</a>]</span>, this solution can use network
+    being applied to 5G-enabled automated driving which is being developed in 5GAA <span>[<a href="#PQoS_white_paper" class="cite xref">PQoS_white_paper</a>]</span>
+, this solution can use network
     information exposure to predict the future network changes to the application layer in order to be prepared for such
     changes and make adaptations in application layer to improve the QoE of users.
     There have been close collaboration between 5GAA and 3GPP to provide E2E solutions on this area.<a href="#section-5-1" class="pilcrow">¶</a></p>
@@ -2096,13 +2124,15 @@ Conclusion:
     one important way to support QoS (MoWIE and PQoS) enhancements is to expose the network status information to the application layer
     and the application layer can take measures to adapt according to the network status information. The network information
     can include the radio network statistics as has been elaborated in Section 4.1 and also the parameters specified
-    in <span>[<a href="#ALTO_METRICS" class="cite xref">ALTO_METRICS</a>]</span>. In Section 4.1, the parameters which MoWIE proposes to expose can provide real-time status
+    in <span>[<a href="#ALTO_METRICS" class="cite xref">ALTO_METRICS</a>]</span>
+. In Section 4.1, the parameters which MoWIE proposes to expose can provide real-time status
     and rich information about the wireless link which can be utilized by AI-ML (Machine Learning) algorithms
     to predict the available network resources in the subsequent transmission opportunities, which can help the
     application layer to adjust its traffic pattern or codec profile to optimize the user’s experience.
     By mapping these parameters with the ALTO metrics which has been proposed or defining potential new ALTO metrics,
     it is possible to extent current ALTO protocols to provide better support for real-time immersive services.
-    In ETSI MEC, RNIS <span>[<a href="#ETSI_MEC" class="cite xref">ETSI_MEC</a>]</span> has proposed to expose physical layer, Layer 2 and higher layer
+    In ETSI MEC, RNIS <span>[<a href="#ETSI_MEC" class="cite xref">ETSI_MEC</a>]</span>
+ has proposed to expose physical layer, Layer 2 and higher layer
     parameters including 4G and 5G. There are some common parameters like RSRP, RSRQ and RSSI which MoWIE also proposes;
     however, RNIS is based on the MEC architecture, and MoWIE is not restricted to MEC case.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">
@@ -2181,11 +2211,13 @@ Conclusion:
       mechanisms.<a href="#section-5-7.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-5-7.4">
-          <p id="section-5-7.4.1">Cost metrics considerations. In <span>[<a href="#ALTO_METRICS" class="cite xref">ALTO_METRICS</a>]</span>, some cost metrics are
+          <p id="section-5-7.4.1">Cost metrics considerations. In <span>[<a href="#ALTO_METRICS" class="cite xref">ALTO_METRICS</a>]</span>
+, some cost metrics are
         being standardized including throughput/bit rate, latency, priority, error rate,
         jitter. These parameters can be linked with cost metrics in 5G network entities like network
         exposure function (NEF) <span>[<a href="#TS23.501" class="cite xref">TS23.501</a>]</span>
-        or application function (AF) <span>[<a href="#TS23.501" class="cite xref">TS23.501</a>]</span>.
+        or application function (AF) <span>[<a href="#TS23.501" class="cite xref">TS23.501</a>]</span>
+.
         NEF or AF, which act as ALTO Clients, utilizing the network information exposure
         capability provided by 3GPP standards, can request to expose some of the proposed parameters with
         consideration of the ALTO performance metrics.<a href="#section-5-7.4.1" class="pilcrow">¶</a></p>
@@ -2197,11 +2229,13 @@ Conclusion:
    act as part of the functional module of AF to converge with the 5G system through the implementation in the AF.
    It can receive the cellular-based network information through interaction with NEF, identify the ALTO server
    using ALTO service discovery, and request available ALTO information prepared by the ALTO server using ALTO
-   Protocol <span>[<a href="#RFC7285" class="cite xref">RFC7285</a>]</span>. The ALTO server can be implemented in other places through ALTO architecture and can interact
+   Protocol <span>[<a href="#RFC7285" class="cite xref">RFC7285</a>]</span>
+. The ALTO server can be implemented in other places through ALTO architecture and can interact
    with the third parties (e.g. Content providers) via external interfaces. Furthermore, the ALTO server can aggregate
    information from multiple functional entities to provide an abstract and unified view that can be more useful to
    applications. Examples of other systems include (but are not limited to) static network configuration databases,
-   dynamic network information, routing protocols, provisioning policies, and interfaces to outside parties <span>[<a href="#RFC7285" class="cite xref">RFC7285</a>]</span>.
+   dynamic network information, routing protocols, provisioning policies, and interfaces to outside parties <span>[<a href="#RFC7285" class="cite xref">RFC7285</a>]</span>
+.
    Please note that these components shown in Figure 5-1 are out of IETF ALTO scope and are just for completeness to put here.
    As a result, the ALTO Client can perform ALTO Service Discovery and interact with the ALTO server via ALTO Protocol to get
    the ALTO information and ALTO metrics regarding the proposed parameters with the help of MoWIE that can be updated dynamically
@@ -2250,7 +2284,8 @@ Conclusion:
 </div>
 <p id="section-5-10">By extending the exposure scope of network information beyond the cellular access,
     ALTO can help improve the QoE of several applications running on endpoints located in cellular networks.
-     <span>[<a href="#ALTO_USE_CASES" class="cite xref">ALTO_USE_CASES</a>]</span> is work in progress that investigates use cases where the performances of these applications
+<span>[<a href="#ALTO_USE_CASES" class="cite xref">ALTO_USE_CASES</a>]</span>
+ is work in progress that investigates use cases where the performances of these applications
      can be further improved with abstracted network information and suitable transportation means provided by ALTO.
       Additionally, upon reviewing the existing ALTO capabilities, it lists the ALTO features that need to be extended
       or defined to support the presented use cases.<a href="#section-5-10" class="pilcrow">¶</a></p>

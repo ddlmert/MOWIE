@@ -111,7 +111,7 @@
    through MoWIE; using such an information, the applications can then
    adapt key control knobs such as media codec schemes, encapsulation, and
    application layer processing to minimize QoE distortion. Based on the
-   evaluations, we discuss how the MoWIE features can define extensions of the ALTO protocol, 
+   evaluations, we discuss how the MoWIE features can define extensions of the ALTO protocol,
    to expose more lower-layer and finer grain network dynamics.</t>
 
 	</abstract>
@@ -121,12 +121,12 @@
 	<section title="Introduction of Network-aware Applications" anchor="sect-1"><t>
    With the deployment of 5G networks <xref target="draft-ietf-dmm-5g-uplane-analysis"/>, more
    applications are available as remote cloud-based
-   applications (e.g., cloud AR/VR/MR).  
-   Many conventional interactive, daily business applications are also becoming widely used 
+   applications (e.g., cloud AR/VR/MR).
+   Many conventional interactive, daily business applications are also becoming widely used
    as cloud applications, with the help of mobile networks and cloud, e.g., cloud video
    conference. Especially, during the coronavirus pandemic in 2020,
    many people had to stay at home and work/study remotely, and the usage
-   of cloud applications, including cloud-based online courses, cloud-based conferencing, 
+   of cloud applications, including cloud-based online courses, cloud-based conferencing,
    and cloud gaming, have surged significantly.</t>
 
 	<t>
@@ -139,7 +139,7 @@
    and then adaptively changes its network-related configuration parameters which may impact QoS handling
    as well as logical functions to support the upper layer application.  However, when only application information is
    utilized, the QoE that an application can achive can be limited in some cases.
-   First, information from the application side (i.e., the 3rd party application server) 
+   First, information from the application side (i.e., the 3rd party application server)
    may have relatively long delay. When a user
    enters a location with a bad network connectivity, such as an elevator or an underground
    garage, the application will not receive such an information
@@ -155,19 +155,19 @@
    help applications to describe how many resources the user will get and how many
    users are competing with it.  Such an information is helpful to predict
    the network and streaming videos. However, the application cannot get
-   those kinds of information yet. Because 5G network deployed by the mobile 
-   network operation which is normally in a different domain compared with internet-based 
-   applications with 3rd party, the application server may not be able to directly get the 
-   network internal status without network exposure. Therefore, there have been continuous 
-   efforts in 3GPP enable network exposure to serve the 3rd party applications 
+   those kinds of information yet. Because 5G network deployed by the mobile
+   network operation which is normally in a different domain compared with internet-based
+   applications with 3rd party, the application server may not be able to directly get the
+   network internal status without network exposure. Therefore, there have been continuous
+   efforts in 3GPP enable network exposure to serve the 3rd party applications
    in a better way in terms of network resource utilization and user’s experiences.</t>
 
 	<t>
    The 3GPP mobile networks are always adhering to standard solutions to get network
-   dynamic indicators that can be used by applications.  In 3GPP, many IP-based QoS mechanisms are used. For example, 
+   dynamic indicators that can be used by applications.  In 3GPP, many IP-based QoS mechanisms are used. For example,
    ECN <xref target="RFC3168"/> has been
    supported by the 4G radio station (eNB) to provide CE(Congestion
-   Encountered) information to the IMS application to perform 
+   Encountered) information to the IMS application to perform
    Adaptive Bitrate (ABR) <xref target="TS26.114"/>. The application can downgrade the
    bit rate after receiving the CE indication, but does not know the exact
    bit rate to be selected. DSCP <xref target="RFC2474"/> is used to identify the
@@ -179,12 +179,12 @@
    current throughput and buffering states and adaptively select the
    next segment of video streaming with a suitable bitrate in order to
    avoid re-buffering. SAND-DASH <xref target="TS26.247"/> defines the mechanism
-   that the network/server can provide available throughput to the 
+   that the network/server can provide available throughput to the
    applications; in such case, the better bitrate can be selected by DASH
    application.</t>
 
 	<t>
-   There are some early works on network status exposure to TCP server, which may 
+   There are some early works on network status exposure to TCP server, which may
    also indirectly impact application layer optimization, but did not consider 5G networks <xref target="Sprecher_mobile"/>,
    <xref target="flinck_mobile"/>
    In 5G cellular networks, network capability exposure has been
@@ -192,10 +192,10 @@
    location and network status towards the 3rd party application servers
    modeled as AF (Application Function) <xref target="TS23.501"/>. In such a case, the AF
    can request the 5GS to establish a dedicated QoS Flow to transport an
-   IP flow with the AF-provided QoS requirements. Via certain measurements, 
-   network internal status including congestion can be exposed and optimization 
-   can be carried out for the cellular network <xref target="PBECC"/>.</t> 
-   
+   IP flow with the AF-provided QoS requirements. Via certain measurements,
+   network internal status including congestion can be exposed and optimization
+   can be carried out for the cellular network <xref target="PBECC"/>.</t>
+
    <t>
    5G also can
    provide QNC (QoS Notification Control) to an AF if the
@@ -210,20 +210,20 @@
    prediction is realized by network function inside 5GC to collect and
    analyze the status and parameters from the 5G network entities, and
    deliver the analytics results to an entity such as application
-   server. </t> 
-   
+   server. </t>
+
    <t>
    However, both network capability exposure and QoS
    prediction solutions are designed for 5G access and core networks,
    which cannot cover the whole end-to-end network.  How to enable the
    application which locates the internal DN (data network) to be aware of the lower layer networks within 5G network are
    an important area for both industrial and academic researchers, that is addressed by MoWIE. </t>
-   
+
    <t>
-   MoWIE is a solution that aims 
-   to realize real-time provisioning of cellular radio network information 
-   by networks to applications, thus helping service providers to achieve a better policy control and 
-   to improve user experience. The benefits of the MoWIE concept/solution have been 
+   MoWIE is a solution that aims
+   to realize real-time provisioning of cellular radio network information
+   by networks to applications, thus helping service providers to achieve a better policy control and
+   to improve user experience. The benefits of the MoWIE concept/solution have been
    experimented on several use cases, detailed in Section 4.1.
 </t>
 
@@ -241,7 +241,7 @@
    the user devices.  Cloud gaming is regarded as one major killer
    application as well as traffic contributor to wireless and cellular
    networks including 5G.  The major advantages of cloud gaming are easy
-   &amp; quick starting (no/less need to download and install a high-volume 
+   &amp; quick starting (no/less need to download and install a high-volume
    software in the user device), less cost and process load in the user
    device and it is also regarded as an anti-cheating measure. Thus, cloud
    gaming has become a competitive replacement for console gaming
@@ -310,7 +310,7 @@
    ms.  Cloud VR service generally requires 100~500 Mbps bandwidth and
    20~50 ms end-to-end latency.  It is noted that these values are
    dependent on the parameter settings and they are provided to
-   illustrate the order of magnitude of these parameters for the aforementioned 
+   illustrate the order of magnitude of these parameters for the aforementioned
    use cases. These value range may be updated according to
    specific scenarios and requirements.</t>
 
@@ -413,8 +413,8 @@
    server side.  In reality, it is not easy to obtain such data in an
    effective and efficient way.  The lack of standardized approach to
    acquire these data makes it difficult to make this usable for different
-   applications for large scale deployment. Meanwhile, since these data 
-   reflect the real-time network status, they may change rapidly and randomly, 
+   applications for large scale deployment. Meanwhile, since these data
+   reflect the real-time network status, they may change rapidly and randomly,
    and hence can be hard to use a theoretical model to characterize.</t>
 
 	<t>
@@ -444,9 +444,9 @@
    The raw data are collected firstly from the radio network and core
    network; further processing on these collected data and
    the exposure of Network information are provided to the application Server.</t>
-   
+
    <t>
-   An application server can send network information request about UE/Cell 
+   An application server can send network information request about UE/Cell
    level information and obtain the NIS response on network
    information from the mobile network.  After user data pre-processing,
    the application server will make best use of the network information
@@ -483,7 +483,7 @@
 	<t>MCS: The index of Modulation and Coding Scheme (MCS);</t>
 
 	<t>The number of packets occupied in PDCP buffer;</t>
-   
+
    <t>The number of downlink PDCP Service Data Unit (SDU) packets;</t>
 
 	<t>The number of lost PDCP SDU packets;</t>
@@ -499,11 +499,11 @@
 	</list></t>
 
    <t>
-   The network information listed here can also be found in 3GPP (PRB <xref target="TS38.211"/>, cell load <xref target="TS38.300"/> 
-   PDCP for 5G <xref target="TS38.323"/>  RSRP, RSRQ, RSSI <xref target="TS38.331"/>, MCS, CQI <xref target="TS38.214"/>, 
-   The number of packets occupied in PDCP buffer, the number of Downlink PDCP SDU packets, the number of PDCP SDU packets lost, 
-   the per-UE PDCP buffer status <xref target="TS38.323"/>), to demonstrate the potential benefits of MoWIE for network-application 
-   integration over cellular network. Figure 3-1 and Figure 3-2 list the data types correponding 
+   The network information listed here can also be found in 3GPP (PRB <xref target="TS38.211"/>, cell load <xref target="TS38.300"/>
+   PDCP for 5G <xref target="TS38.323"/>  RSRP, RSRQ, RSSI <xref target="TS38.331"/>, MCS, CQI <xref target="TS38.214"/>,
+   The number of packets occupied in PDCP buffer, the number of Downlink PDCP SDU packets, the number of PDCP SDU packets lost,
+   the per-UE PDCP buffer status <xref target="TS38.323"/>), to demonstrate the potential benefits of MoWIE for network-application
+   integration over cellular network. Figure 3-1 and Figure 3-2 list the data types correponding
    to the cell-level information and UE-level information, respectively.</t>
 <figure><artwork><![CDATA[
             +----------------------+--------------------------+
@@ -919,31 +919,31 @@ Conclusion:
 	</section>
 
 	<section title="Standardization Considerations of MoWIE as an Extension to ALTO" anchor="sect-5"><t>
-    In 3GPP, network information exposure based on control plane mechanism is introduced in 4G and 5G systems. 
-    In 3GPP Release 17, there is a work item named 5G_AIS (Advanced Interactive Services) which focuses on 
-    QoS enhancements for interactive services including cloud gaming, XR, remote driving and real-time digital 
-    twin. There is also continuous work in Release 18 XRM (XR and media services), which focuses on strengthening the 
-    interaction and collaboration between applications and networks by improving the ability of the network information 
-    exposure especially for XR and multimedia services. MoWIE is closedly related to this study as it can be a tool to 
-    support exposure of 5G network status information. MoWIE can also support QoS prediction technologies which is 
-    being applied to 5G-enabled automated driving which is being developed in 5GAA <xref target="PQoS_white_paper"/>, this solution can use network 
-    information exposure to predict the future network changes to the application layer in order to be prepared for such 
-    changes and make adaptations in application layer to improve the QoE of users.  
+    In 3GPP, network information exposure based on control plane mechanism is introduced in 4G and 5G systems.
+    In 3GPP Release 17, there is a work item named 5G_AIS (Advanced Interactive Services) which focuses on
+    QoS enhancements for interactive services including cloud gaming, XR, remote driving and real-time digital
+    twin. There is also continuous work in Release 18 XRM (XR and media services), which focuses on strengthening the
+    interaction and collaboration between applications and networks by improving the ability of the network information
+    exposure especially for XR and multimedia services. MoWIE is closedly related to this study as it can be a tool to
+    support exposure of 5G network status information. MoWIE can also support QoS prediction technologies which is
+    being applied to 5G-enabled automated driving which is being developed in 5GAA <xref target="PQoS_white_paper"/>, this solution can use network
+    information exposure to predict the future network changes to the application layer in order to be prepared for such
+    changes and make adaptations in application layer to improve the QoE of users.
     There have been close collaboration between 5GAA and 3GPP to provide E2E solutions on this area.</t>
-    
+
     <t>
-    Among these above mentioned work items, 
-    one important way to support QoS (MoWIE and PQoS) enhancements is to expose the network status information to the application layer 
-    and the application layer can take measures to adapt according to the network status information. The network information 
+    Among these above mentioned work items,
+    one important way to support QoS (MoWIE and PQoS) enhancements is to expose the network status information to the application layer
+    and the application layer can take measures to adapt according to the network status information. The network information
     can include the radio network statistics as has been elaborated in Section 4.1 and also the parameters specified
-    in <xref target="ALTO_METRICS"/>. In Section 4.1, the parameters which MoWIE proposes to expose can provide real-time status 
+    in <xref target="ALTO_METRICS"/>. In Section 4.1, the parameters which MoWIE proposes to expose can provide real-time status
     and rich information about the wireless link which can be utilized by AI-ML (Machine Learning) algorithms
-    to predict the available network resources in the subsequent transmission opportunities, which can help the 
-    application layer to adjust its traffic pattern or codec profile to optimize the user’s experience. 
-    By mapping these parameters with the ALTO metrics which has been proposed or defining potential new ALTO metrics, 
-    it is possible to extent current ALTO protocols to provide better support for real-time immersive services. 
-    In ETSI MEC, RNIS <xref target="ETSI_MEC"/> has proposed to expose physical layer, Layer 2 and higher layer 
-    parameters including 4G and 5G. There are some common parameters like RSRP, RSRQ and RSSI which MoWIE also proposes; 
+    to predict the available network resources in the subsequent transmission opportunities, which can help the
+    application layer to adjust its traffic pattern or codec profile to optimize the user’s experience.
+    By mapping these parameters with the ALTO metrics which has been proposed or defining potential new ALTO metrics,
+    it is possible to extent current ALTO protocols to provide better support for real-time immersive services.
+    In ETSI MEC, RNIS <xref target="ETSI_MEC"/> has proposed to expose physical layer, Layer 2 and higher layer
+    parameters including 4G and 5G. There are some common parameters like RSRP, RSRQ and RSSI which MoWIE also proposes;
     however, RNIS is based on the MEC architecture, and MoWIE is not restricted to MEC case.</t>
 
     <t>
@@ -993,10 +993,10 @@ Conclusion:
    the data path.  But creating such second path is a big change to
    current widely used transport protocols and a lot of applications
    also need to change, this second path is also challengeable.</t>
-        
-        
+
+
     <t>In this draft, we mainly discuss ALTO extension-based design in tackling with this problem.	
-    Specifically, the MoWIE extension will reuse existing ALTO mechanisms including 
+    Specifically, the MoWIE extension will reuse existing ALTO mechanisms including
     information resource directory, extensible performance metrics and calendaring, and unified properties.
     Below is an overview of key considerations; security
    considerations are in the following section.</t>
@@ -1022,34 +1022,34 @@ Conclusion:
       integrate fundamental overhead, stability, and reliability
       mechanisms.</t>
 
-    <t>Cost metrics considerations. In <xref target="ALTO_METRICS"/>, some cost metrics are 
-        being standardized including throughput/bit rate, latency, priority, error rate, 
-        jitter. These parameters can be linked with cost metrics in 5G network entities like network 
-        exposure function (NEF) <xref target="TS23.501"/> 
-        or application function (AF) <xref target="TS23.501"/>. 
-        NEF or AF, which act as ALTO Clients, utilizing the network information exposure 
-        capability provided by 3GPP standards, can request to expose some of the proposed parameters with 
+    <t>Cost metrics considerations. In <xref target="ALTO_METRICS"/>, some cost metrics are
+        being standardized including throughput/bit rate, latency, priority, error rate,
+        jitter. These parameters can be linked with cost metrics in 5G network entities like network
+        exposure function (NEF) <xref target="TS23.501"/>
+        or application function (AF) <xref target="TS23.501"/>.
+        NEF or AF, which act as ALTO Clients, utilizing the network information exposure
+        capability provided by 3GPP standards, can request to expose some of the proposed parameters with
         consideration of the ALTO performance metrics.</t>
 
 	</list>
 	</t>
-   
-   <t>With the better utilization of the 5G network, IETF ALTO can well benefit from MoWIE architecture and 
-   QoE for the use cases of NAA applications can be achieved with the help of the convergence of 5G network 
-   architecture and IETF ALTO. For example, it was shown in Figure 5-1 that the ALTO client can act as AF or 
-   act as part of the functional module of AF to converge with the 5G system through the implementation in the AF. 
-   It can receive the cellular-based network information through interaction with NEF, identify the ALTO server 
-   using ALTO service discovery, and request available ALTO information prepared by the ALTO server using ALTO 
-   Protocol <xref target="RFC7285"/>. The ALTO server can be implemented in other places through ALTO architecture and can interact 
-   with the third parties (e.g. Content providers) via external interfaces. Furthermore, the ALTO server can aggregate 
-   information from multiple functional entities to provide an abstract and unified view that can be more useful to 
-   applications. Examples of other systems include (but are not limited to) static network configuration databases, 
-   dynamic network information, routing protocols, provisioning policies, and interfaces to outside parties <xref target="RFC7285"/>. 
-   Please note that these components shown in Figure 5-1 are out of IETF ALTO scope and are just for completeness to put here. 
-   As a result, the ALTO Client can perform ALTO Service Discovery and interact with the ALTO server via ALTO Protocol to get 
-   the ALTO information and ALTO metrics regarding the proposed parameters with the help of MoWIE that can be updated dynamically 
-   based on network conditions from cellular aspects in Section 4.1.  It is noted that in addition to AF-based convergence 
-   architecture which relies on control-plane interfaces e.g. N5/N33, MoWIE can also utilized user plane exposure via N6 or UPF 
+
+   <t>With the better utilization of the 5G network, IETF ALTO can well benefit from MoWIE architecture and
+   QoE for the use cases of NAA applications can be achieved with the help of the convergence of 5G network
+   architecture and IETF ALTO. For example, it was shown in Figure 5-1 that the ALTO client can act as AF or
+   act as part of the functional module of AF to converge with the 5G system through the implementation in the AF.
+   It can receive the cellular-based network information through interaction with NEF, identify the ALTO server
+   using ALTO service discovery, and request available ALTO information prepared by the ALTO server using ALTO
+   Protocol <xref target="RFC7285"/>. The ALTO server can be implemented in other places through ALTO architecture and can interact
+   with the third parties (e.g. Content providers) via external interfaces. Furthermore, the ALTO server can aggregate
+   information from multiple functional entities to provide an abstract and unified view that can be more useful to
+   applications. Examples of other systems include (but are not limited to) static network configuration databases,
+   dynamic network information, routing protocols, provisioning policies, and interfaces to outside parties <xref target="RFC7285"/>.
+   Please note that these components shown in Figure 5-1 are out of IETF ALTO scope and are just for completeness to put here.
+   As a result, the ALTO Client can perform ALTO Service Discovery and interact with the ALTO server via ALTO Protocol to get
+   the ALTO information and ALTO metrics regarding the proposed parameters with the help of MoWIE that can be updated dynamically
+   based on network conditions from cellular aspects in Section 4.1.  It is noted that in addition to AF-based convergence
+   architecture which relies on control-plane interfaces e.g. N5/N33, MoWIE can also utilized user plane exposure via N6 or UPF
    which makes network exposure mechanisms more comprehensive and flexisble.
    </t>
 
@@ -1063,26 +1063,26 @@ Conclusion:
                               |
     +-----------+        +---------+
     | External  |        |  ALTO   |
-    | Interface |--------| Server  |            
-    +-----+-----+        +----+----+             
+    | Interface |--------| Server  |
+    +-----+-----+        +----+----+
           |                   |
           |                   | ALTO protocol
-          |                   |                            
-    +-------------+   +-------^--------+         
-    | 3rd content |   | ALTO Client/AF | 
-    |   provider  |   +----------------+            
-    +-------------+           |---------------+     
+          |                   |
+    +-------------+   +-------^--------+
+    | 3rd content |   | ALTO Client/AF |
+    |   provider  |   +----------------+
+    +-------------+           |---------------+
            |                  |               |
            |                  |N33            |N5
            |             +----------+    +---------+
            |             |   NEF    |    |   PCF   |
-           |             +----------+    +---------+ 
+           |             +----------+    +---------+
            |                  |               |N7
            |                  |---------------+
-           |                  |                
+           |                  |
            |             +----------+ N11 +-------+
            |             |   SMF    |-----|  AMF  |
-           |             +----------+     +-------+ 
+           |             +----------+     +-------+
            |                  |N4             |N2
            |                  |               |
       +----------+            |               |
@@ -1095,10 +1095,10 @@ Conclusion:
 
    <t>By extending the exposure scope of network information beyond the cellular access,
     ALTO can help improve the QoE of several applications running on endpoints located in cellular networks.
-     <xref target="ALTO_USE_CASES"/> is work in progress that investigates use cases where the performances of these applications 
+     <xref target="ALTO_USE_CASES"/> is work in progress that investigates use cases where the performances of these applications
      can be further improved with abstracted network information and suitable transportation means provided by ALTO.
-      Additionally, upon reviewing the existing ALTO capabilities, it lists the ALTO features that need to be extended 
-      or defined to support the presented use cases. 
+      Additionally, upon reviewing the existing ALTO capabilities, it lists the ALTO features that need to be extended
+      or defined to support the presented use cases.
  </t>
 
 	</section>
@@ -1124,7 +1124,7 @@ Conclusion:
 	</section>
 
 	<section title="Acknowledgments" anchor="sect-8"><t>
-   The authors would like to thank Huang Wei and Mohamed Boucadair for 
+   The authors would like to thank Huang Wei and Mohamed Boucadair for
    their contribution and technical review comments to the previous versions of this draft.</t>
 	</section>
 
@@ -1282,7 +1282,7 @@ Conclusion:
 	</front>
 
 	<seriesInfo name="&quot;NR;" value="Physical channels and modulation&quot;"/>
-	</reference>  
+	</reference>
 
 	<reference anchor="TS38.214" target="https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=3216"><front>
 	<title>3rd Generation Partnership Project (3GPP)</title>
@@ -1315,7 +1315,7 @@ Conclusion:
 	</front>
 
 	<seriesInfo name="&quot;NR;" value="Packet Data Convergence Protocol (PDCP) specification&quot;"/>
-	</reference> 
+	</reference>
 
     <reference anchor="TS38.331" target="https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=3197"><front>
 	<title>3rd Generation Partnership Project (3GPP)</title>
@@ -1408,7 +1408,7 @@ Conclusion:
 	</reference>
 
 	</references>
-    
+
 	</back>
 
 	</rfc>

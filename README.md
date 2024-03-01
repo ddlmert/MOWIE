@@ -2,7 +2,7 @@
 
 This is the working area for the individual Internet-Draft, "MoWIE for Network Aware Application".
 
-* [Editor's Copy](https://ddlmert.github.io/MOWIE/#go.draft-mertus-alto-mowie-for-network-aware-app.html)
+* [Editor's Copy](https://ddlmert.github.io/MOWIE/draft-mertus-alto-mowie-for-network-aware-app.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-mertus-alto-mowie-for-network-aware-app)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-mertus-alto-mowie-for-network-aware-app)
 * [Compare Editor's Copy to Individual Draft](https://ddlmert.github.io/MOWIE/#go.draft-mertus-alto-mowie-for-network-aware-app.diff)

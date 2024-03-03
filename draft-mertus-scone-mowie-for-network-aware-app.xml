@@ -175,7 +175,7 @@
    efforts in 3GPP to increase network exposure.</t>
 
          <t>
-   3GPP mobile networks adhere to standard solutions to get 
+   3GPP mobile networks adhere to standard solutions to get
    dynamic network indicators for use by applications.  In 3GPP, many IP-based QoS mechanisms are used. For example,
    ECN <xref target="RFC3168"/>
  has been
@@ -190,7 +190,7 @@
 , but typically the application
    cannot dynamically change the DSCP to improve bit rate based on
    network status. Mapping DSCP with 4G QCI or 5G 5QI standards could be a good approach to better realize end-to-end QoS.
-   
+
 
    DASH <xref target="MPEGDASH"/>
  is an MPEG standard widely used by
@@ -224,7 +224,7 @@
    provide QNC (QoS Notification Control) to an AF if the
    GBR(Guaranteed Bitrate) of the established GBR QoS Flow cannot be
    fulfilled. After receiving the QNC
-   notification the AF can change the bitrate, but the AF has no information on which bitrate to 
+   notification the AF can change the bitrate, but the AF has no information on which bitrate to
    select. So, 5G enhances the QNC by providing a list of
    AQPs (alternative QoS profiles). With AQP, a 5G network provides
    a subset of supported AQPs with the QNC, and then the AF selects a bit

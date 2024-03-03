@@ -4,7 +4,7 @@
 <!ENTITY RFC3168 SYSTEM "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3168.xml">
 <!ENTITY RFC7285 SYSTEM "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7285.xml">
 ]>
-<rfc submissionType="IETF" docName="draft-mertus-alto-mowie-for-network-aware-app-latest" category="std" ipr="trust200902">
+<rfc submissionType="IETF" docName="draft-mertus-scone-mowie-for-network-aware-app-latest" category="std" ipr="trust200902">
 
    <?rfc strict="yes"?>
    <?rfc compact="yes"?>
@@ -135,7 +135,7 @@
    </front>
 
    <middle>
-      <section title="Introduction of Network-aware Applications" anchor="sect-1">
+      <section title="Current Status of Network-Aware Applications" anchor="sect-1">
          <t>
    With the deployment of 5G networks <xref target="draft-ietf-dmm-5g-uplane-analysis"/>
 , more
@@ -143,10 +143,8 @@
    applications (e.g., cloud AR/VR/MR).
    Many conventional interactive, daily business applications are also becoming widely used
    as cloud applications, with the help of mobile networks and cloud, e.g., cloud video
-   conference. Especially, during the coronavirus pandemic in 2020,
-   many people had to stay at home and work/study remotely, and the usage
-   of cloud applications, including cloud-based online courses, cloud-based conferencing,
-   and cloud gaming, have surged significantly.</t>
+   conference. This shift was further accelerated by the COVID-19 pandemic in 2020, when many people had to stay at home and work/study remotely</t>
+
 
          <t>
    To optimize QoE for end users using mobile networks (a.k.a., cellular networks),
@@ -155,35 +153,30 @@
    traffic and the rendering/mixing in the cloud. Currently, such an
    application assumes the network as a link and continuously uses
    client or server measurements to detect network characteristics,
-   and then adaptively changes its network-related configuration parameters which may impact QoS handling
-   as well as logical functions to support the upper layer application.  However, when only application information is
-   utilized, the QoE that an application can achive can be limited in some cases.
+   and then adaptively changes its network-related configuration parameters, possibley impacitng QoS handling
+   and logical functions supporting the upper layer application.  However, when only application information is
+   utilized, the QoE that an application achieves is limited for several reasons.
    First, information from the application side (i.e., the 3rd party application server)
-   may have relatively long delay. When a user
+   may have a relatively long delay. When a user
    enters a location with a bad network connectivity, such as an elevator or an underground
    garage, the application will not receive such an information
-   immediately.  As a result, the buffer of video application may have a
-   high chance to run out.  Then the screen will freeze and users' QoE
-   will be harmed.  Besides, the application does not have information
+   immediately.  As a result, the buffer of a video application may run out, resulting in a frozen screen and harming users' QoE. The application also does not have information
    about other users in the cell.  Thus, it cannot know how many
-   resources it can get and when it will change.  If other users enter
-   the cell and compete on the usage of the resource, the application layer may misjudge
-   the resource and request a high bitrate.  Then the delay will
-   increase and QoE will drop.  Some information from the network layer like
+   resources it can get and when this will change.  If other users enter
+   the cell and compete for resources, the application layer may misjudge
+   the resources available and request a high bitrate.  Then, the delay will
+   increase and QoE will again drop. Information from the network layer such as
    physical resource block (PRB) information and utilization rate can
-   help applications to describe how many resources the user will get and how many
-   users are competing with it.  Such an information is helpful to predict
-   the network and streaming videos. However, the application cannot get
-   those kinds of information yet. Because 5G network deployed by the mobile
-   network operation which is normally in a different domain compared with internet-based
-   applications with 3rd party, the application server may not be able to directly get the
-   network internal status without network exposure. Therefore, there have been continuous
-   efforts in 3GPP enable network exposure to serve the 3rd party applications
-   in a better way in terms of network resource utilization and user’s experiences.</t>
+   help applications decide how many resources a user can access in order to inform network quality predictions and  further optimize video streaming. The application, however, cannot get
+   this kind of information yet. Because 5G networks deployed by a mobile
+   network operation are normally in a different domain than 3rd-party internet-based
+   applications, the application server can not directly get the
+   network internal status without network exposure. For this reason, there have been continuous
+   efforts in 3GPP to increase network exposure.</t>
 
          <t>
-   The 3GPP mobile networks are always adhering to standard solutions to get network
-   dynamic indicators that can be used by applications.  In 3GPP, many IP-based QoS mechanisms are used. For example,
+   3GPP mobile networks adhere to standard solutions to get 
+   dynamic network indicators for use by applications.  In 3GPP, many IP-based QoS mechanisms are used. For example,
    ECN <xref target="RFC3168"/>
  has been
    supported by the 4G radio station (eNB) to provide CE(Congestion
@@ -195,32 +188,34 @@
  is used to identify the
    QoS class and paging strategy <xref target="TS23.501"/>
 , but typically the application
-   cannot dynamically change the DSCP to improve the bit rate based on the
-   network status by mapping DSCP with 4G QCI or 5G 5QI can be a good approach to realize end-to-end QoS.
+   cannot dynamically change the DSCP to improve bit rate based on
+   network status. Mapping DSCP with 4G QCI or 5G 5QI standards could be a good approach to better realize end-to-end QoS.
+   
+
    DASH <xref target="MPEGDASH"/>
- is an MPEG standard widely used for
-   the applications to detect the throughput of the network based on the
-   current throughput and buffering states and adaptively select the
-   next segment of video streaming with a suitable bitrate in order to
-   avoid re-buffering. SAND-DASH <xref target="TS26.247"/>
+ is an MPEG standard widely used by
+   applications to predict the throughput of the network based on the
+   current throughput and buffering state in order to dynamically select a suitable bitrate for the
+   next segment of video streaming which
+   avoids re-buffering. SAND-DASH <xref target="TS26.247"/>
  defines the mechanism
-   that the network/server can provide available throughput to the
-   applications; in such case, the better bitrate can be selected by DASH
+   through which the network/server can provide available throughput to
+   applications; in this case, the better bitrate can be selected by DASH
    application.</t>
 
 <t>
-   There are some early works on network status exposure to TCP server, which may
-   also indirectly impact application layer optimization, but did not consider 5G networks <xref target="Sprecher_mobile"/>
+   There is also some early work on network status exposure to TCP servers which may
+   also indirectly impact application layer optimization but it does not consider 5G networks <xref target="Sprecher_mobile"/>
 ,
 <xref target="flinck_mobile"/>
    In 5G cellular networks, network capability exposure has been
    specified to allow the 5G system (5GS) to expose user device
-   location and network status towards the 3rd party application servers
+   location and network status to 3rd party application servers,
    modeled as AF (Application Function) <xref target="TS23.501"/>
 . In such a case, the AF
    can request the 5GS to establish a dedicated QoS Flow to transport an
    IP flow with the AF-provided QoS requirements. Via certain measurements,
-   network internal status including congestion can be exposed and optimization
+   network internal status, including congestion, can be exposed and optimization
    can be carried out for the cellular network <xref target="PBECC"/>
 .</t>
 
@@ -228,31 +223,30 @@
    5G also can
    provide QNC (QoS Notification Control) to an AF if the
    GBR(Guaranteed Bitrate) of the established GBR QoS Flow cannot be
-   fulfilled, and the AF can change the bitrate after receiving the QNC
-   notification.  But the AF still does not know which bitrate to be
-   selected. So 5G enhances the QNC by providing a list of
+   fulfilled. After receiving the QNC
+   notification the AF can change the bitrate, but the AF has no information on which bitrate to 
+   select. So, 5G enhances the QNC by providing a list of
    AQPs (alternative QoS profiles). With AQP, a 5G network provides
    a subset of supported AQPs with the QNC, and then the AF selects a bit
    rate from 5G network supported AQPs. In such a case, the GBR can
    be fulfilled again if the radio state of the UE is changed.  QoS
-   prediction is realized by network function inside 5GC to collect and
-   analyze the status and parameters from the 5G network entities, and
+   prediction is realized by a network function inside 5GS which collects and
+   analyzes the status and qualities of 5G network entities, and
    deliver the analytics results to an entity such as application
    server. </t>
 
 <t>
    However, both network capability exposure and QoS
-   prediction solutions are designed for 5G access and core networks,
-   which cannot cover the whole end-to-end network.  How to enable the
-   application which locates the internal DN (data network) to be aware of the lower layer networks within 5G network are
-   an important area for both industrial and academic researchers, that is addressed by MoWIE. </t>
+   prediction solutions are only designed for 5G access and core networks,
+   which cannot cover the whole end-to-end network. Enabling applications to detect and understand the various lower layers within 5G networks, particularly the internal DN (data network), is an important area for both industrial and academic researchers. This challenge is addressed by MoWIE.
+   </t>
 
 <t>
    MoWIE is a solution that aims
    to realize real-time provisioning of cellular radio network information
-   by networks to applications, thus helping service providers to achieve a better policy control and
-   to improve user experience. The benefits of the MoWIE concept/solution have been
-   experimented on several use cases, detailed in Section 4.1.
+   by networks to applications, thus helping service providers achieve better policy control and
+   improve user experience. The benefits of the MoWIE concept/solution have been
+   experimentally evaluated in several use cases, detailed in Section XXXXX TO EDIT.
 </t>
 
 </section>

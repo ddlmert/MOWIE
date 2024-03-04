@@ -91,12 +91,16 @@ Table of Contents
      3.1.  Technical Framework
      3.2.  Security Considerations
      3.3.  Benefits and Drawbacks of On-path Signaling
-   4.  IANA Considerations
-   5.  Security Considerations
-   6.  Acknowledgments
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+   4.  Off-path Signaling using QUIC
+     4.1.  Technical Framework
+     4.2.  Security Considerations
+     4.3.  Benefits and Drawbacks of Off-path Signaling
+   5.  IANA Considerations
+   6.  Security Considerations
+   7.  Acknowledgments
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Authors' Addresses
 
 1.  Current Status of Network-Aware Applications
@@ -515,11 +519,94 @@ Table of Contents
    network information.  This may create bottlenecks and limit the
    scalability of the solution.
 
-4.  IANA Considerations
+4.  Off-path Signaling using QUIC
+
+   We will now consider an alternative methodology implementing the
+   MoWIE framework utilizing off-path signaling, again within the QUIC
+   protocol.  This approach diverges from inband communication discussed
+   above.
+
+4.1.  Technical Framework
+
+   In order to implement off-path signaling we must introduce an
+   additional third-party node outside of the direct data path.  This
+   node will be responsible for collecting and processing the network
+   information included in the MoWIE framework.  Discovery of the
+   relevant off-path node by the Application Server may be facilitated
+   by reverse DNS lookups or service discovery protocols.  Once a
+   connection is established, the Application Server can request network
+   information for a particular Application Client.  The off-path node
+   must then discover the bottleneck gNB for the given Application
+   Client in order to determine the relevant network information before
+   sending a response.  This process must be repeated periodically to
+   ensure the Application Server is always communicating with the
+   relevant off-path entity; the dynamic nature of mobile networks,
+   where clients frequently move and switch gNBs, necessitates this.
+
+   In order to identify the relevant gNB, the off-path node must
+   discover the full path from the Application Server to the Client.
+   This path trace may be accomplished through a variety of methods
+   depending on the network infrastructure.  In the context of 5G, the
+   off-path node may leverage 5G Service Based Architecture (SBA)
+   capabilities defined in 3GPP [TS23.501].  This may involve querying
+   core network functions such the Access and Mobility Management
+   Function (AMF) or the Unified Data Management (UDM) function for UE
+   session information, including the current server gNB.  Once the path
+   has been established, the off-path node must periodically monitor
+   changes in network topology as conditions change or, more likely, the
+   user moves.
+
+   Communication between the Application Server and the off-path node
+   would be secured and authenticated by QUIC.  Just as before, off-path
+   nodes may apply rate limiting and other security measures to protect
+   against abuse.
+
+4.2.  Security Considerations
+
+   The introduction of the off-path node brings several security
+   challenges.  Even when applying a principle of minimal information
+   exposure, the off-path node must have access to detailed network path
+   information, which implies certain user privacy concerns.  It is
+   essential to implement strict retention policies to ensure sensitive
+   data is discarded as soon as it is no longer needed.  This concern
+   provides additional emphasis to the need for robust authentication
+   and encryption between the Application Server and the off-path node.
+
+4.3.  Benefits and Drawbacks of Off-path Signaling
+
+   Off-path signaling provides several benefits.  First, by decoupling
+   the network information delivery from the direct data path, we remove
+   the potential for bottlenecks and scalability issues associated with
+   on-path signaling.  Also, regarding extensibility, off-path signaling
+   allows for the integration of broader network information not
+   available from on-path entities.
+
+   Although off-path signaling exposes sensitive information to a new,
+   non-essential entity, this security risk is offset by removing the
+   necessity to mess with an existing QUIC connection, which itself
+   introduced a risk to the original data path.  We also observe that
+   apply an off-path approach greatly reduces the possibility that this
+   signaling mechanism will affect the core functionality of the
+   application.
+
+   Just as gNBs in the on-path approach, the off-path node is a
+   potential bottleneck and point of failure.  Robust error handling and
+   failover mechanisms, similar to those required for gNBs, must be
+   designed to ensure resilience.  These strategies may be applied if
+   the off-path node becomes unavailable for any reason.  Since the off-
+   path node is not responsible for the original data path, the
+   potential for bottlenecks is reduced.
+
+   One final drawback of this approach is that it requires the periodic
+   rediscovery of off-path nodes to accommodate client mobility.  In the
+   on-path approach this is handled implicitly by the gNB.  This adds
+   additional overhead and may impact scalability.
+
+5.  IANA Considerations
 
    This document has no actions for IANA.
 
-5.  Security Considerations
+6.  Security Considerations
 
    The collection, distribution of MoWIE information should consider the
    security requirements on information privacy and information
@@ -533,15 +620,15 @@ Table of Contents
    provided to right applications.  These security requirements can be
    implemented by the TLS and other security mechanisms.
 
-6.  Acknowledgments
+7.  Acknowledgments
 
    The authors would like to thank Huang Wei and Mohamed Boucadair for
    their contribution and technical review comments to the previous
    versions of this draft.
 
-7.  References
+8.  References
 
-7.1.  Normative References
+8.1.  Normative References
 
    [RFC2474]  Nichols, K., Blake, S., Baker, F., and D. Black,
               "Definition of the Differentiated Services Field (DS
@@ -560,7 +647,7 @@ Table of Contents
               RFC 7285, DOI 10.17487/RFC7285, September 2014,
               <https://www.rfc-editor.org/info/rfc7285>.
 
-7.2.  Informative References
+8.2.  Informative References
 
    [ALTO_METRICS]
               "Internet-Draft, draft-ietf-alto-performance-metrics-09",

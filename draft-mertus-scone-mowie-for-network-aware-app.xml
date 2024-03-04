@@ -153,7 +153,7 @@
    traffic and the rendering/mixing in the cloud. Currently, such an
    application assumes the network as a link and continuously uses
    client or server measurements to detect network characteristics,
-   and then adaptively changes its network-related configuration parameters, possibly impacitng QoS handling
+   and then adaptively changes its network-related configuration parameters, possibly impacting QoS handling
    and logical functions supporting the upper layer application.  However, when only application information is
    utilized, the QoE that an application achieves is limited for several reasons.
    First, information from the application side (i.e., the 3rd party application server)
@@ -254,7 +254,7 @@
 <section title="MoWIE Architecture and Applications" anchor="sect-2">
    <section title="Architecture of MoWIE" anchor="sect-2-1">
      <t>
-      The fundamental idea of MoWIE is to provide on-demand and periodic network information from the network to applications, enhancing policy control and user experience. The architecture comprises three core components: the Client Application, the Mobile Network, and the Application Server. Raw data collected from the radio and core networks are processed and exposed to the Application Server. This server can then request network information and use this information to optimize application functions like bit rate, latency, and jitter. Network information provided by MoWIE includes the following:
+      The fundamental idea of MoWIE is to provide on-demand and periodic network information from the network to applications, enhancing policy control and user experience. The architecture comprises three core components: the Client Application, the Mobile Network, and the Application Server. Raw data collected from the Mobile Network is processed and exposed to the Application Server. This server can then request network information and use this information to optimize application functions in the Client Application like bit rate, latency, and jitter. Network information provided by MoWIE includes the following:
       </t>
 
       <t>
@@ -267,7 +267,7 @@
 
       <t>Cell load</t>
 
-      <t>Downklink (DL) MAC data rate per cell</t>
+      <t>Downlink (DL) MAC data rate per cell</t>
 
       <t>DL data rate</t>
 
@@ -314,7 +314,7 @@
          The number of packets occupied in PDCP buffer, the number of DL PDCP SDU packets, the number of PDCP SDU packets lost,
          the per-UE PDCP buffer status <xref target="TS38.323"/>
       ),  demonstrate the potential benefits of MoWIE for network-application
-         integration over cellular network. Figure 3-1 and Figure 3-2 list the data types correponding
+         integration over cellular network. Figure 3-1 and Figure 3-2 list the data types corresponding
          to the cell-level information and UE-level information respectively.</t>
       <figure>
       <artwork><![CDATA[
@@ -362,12 +362,12 @@
 
    </section>
 
-   <section title="Application of MoWIE to Standard NAAs" anchor="sect-2-2">
+   <section title="Standard NAA Use Cases for MoWIE" anchor="sect-2-2">
      <t>
        Cloud gaming, low-delay live shows, and cloud VR are commons NAAs whose QoE can be largely enhanced using MoWIE. These applications require low latency and reliable transmission, interactive features, and high data rates. For instance, cloud gaming demands fast, reliable connections between user devices and cloud servers for motion tracking and visual content delivery, significantly contributing to network traffic. Similarly, low-delay live shows require interactive capabilities with sub-100 ms delays for audience engagement, while cloud VR demands extensive bandwidth and latency as low as 20 ms due to its high data volumes and rendering requirements.
      </t>
      <t>
-       Performance requirements across these applications may be characterized by a parameter range. Here we connsider 1080p~4K as the resolution range, 60-120 FPS (Frames per second) as the frame rate and H.265 as an example compression algorithm. Given these settings, cloud gaming requires a bandwhich of 20-60 Mbps and latency under 200 ms. For low-delay live shows, 20-50 Mbps bandwidth and latency under 100 ms are needed, while cloud VR demands 100-500 Mbps bandwidth and latency under 50 ms. These values are dependent on the parameter settings and are provided to illustrate the order of magnitude of these parameters for the aforementioned use cases.
+       Performance requirements across these applications may be characterized by a parameter range. Here we consider 1080p~4K as the resolution range, 60-120 FPS (Frames per second) as the frame rate and H.265 as an example compression algorithm. Given these settings, cloud gaming requires a bandwidth of 20-60 Mbps and latency under 200 ms. For low-delay live shows, 20-50 Mbps bandwidth and latency under 100 ms are needed, while cloud VR demands 100-500 Mbps bandwidth and latency under 50 ms. These values are dependent on the parameter settings and are provided to illustrate the order of magnitude of these parameters for the aforementioned use cases.
      </t>
      <t>
          MoWIE's network information can be used to enhance these applications, particularly in mobile and wireless contexts where existing methods struggle due to indirect or delayed network status measurements. By providing direct, real-time data, MoWIE enables more responsive and effective application adjustments, leading to substantial performance gains and enhanced QoE.
@@ -382,7 +382,7 @@
       </t>
      <section title="RAN-assisted TCP optimization" anchor="sect-2-3-1">
        <t>
-         In trials on real mobile netowrks, RAN information was used to inform TCP sending window adjustment by predicting bandwidth and buffer status per-UE at RTT granularity (100 ms) and piggybacking such information in TCP ACK. This approach has shown throughput boosts of up to 100%.
+         In trials on real mobile networks, RAN information was used to inform TCP sending window adjustment by predicting bandwidth and buffer status per-UE at RTT granularity (100 ms) and piggybacking such information in TCP ACK. This approach has shown throughput boosts of up to 100%.
        </t>
      </section>
      <section title="ROI Detection" anchor="sect-2-3-2">
@@ -421,7 +421,7 @@
          </t>
 
          <t>
-            This experiement applied AI-based rate adaptation utilizing MCS network information from gNBs <xref target="TS38.214"/> in cloud-gaming over Tencent's China Mobile LTE network. MCS information was provided directly to the applciation. Data was collected over several network conditions: 1&#41; low bandwhich, 2&#41; high user load, 3-5&#41; random user distributions. Lagging rate is defined as the ratio between the number of frames with transmission delay greater than 200ms and the total number of frames.
+            This experiment applied AI-based rate adaptation utilizing MCS network information from gNBs <xref target="TS38.214"/> in cloud-gaming over Tencent's China Mobile LTE network. MCS information was provided directly to the application. Data was collected over several network conditions: 1&#41; low bandwidth, 2&#41; high user load, 3-5&#41; random user distributions. Lagging rate is defined as the ratio between the number of frames with transmission delay greater than 200ms and the total number of frames.
          </t>
          <figure>
             <artwork><![CDATA[
@@ -448,211 +448,49 @@
    </section>
  </section>
 
- <section title="placeholder" anchor="sect-3">
+ <section title="On-path Signaling using QUIC" anchor="sect-3">
    <t>
-      It is noted that the more real-time network resource status the application can learn, the better it can predict how much network resource it can use within a prediction time window. However, there is tradeoff between network information collection frequency and its load and feasibility to the network devices. In principle, the total network resource consumed for such network status reporting is also designed in light-weight manner, e.g., by properly controlling the interval of report and also the number of bits needed to convey the reported information elements. In our experiments, the network status information can be obtained in an adaptive interval based on the change rate of network status, in order to provide good prediction with less load introduced in the network. In fact, not all scenarios need a very frequent information collection. If some information only changes in a very small range and won't influence the final decision, it is unnecessary to report such information all the time. However, if its value varies over the preset threshold, it will inform the application immediately.
+      This section explores a possible implementation of the MoWIE framework using on-path signaling, or inband communication, within the QUIC protocol. We aim to achieve the properties set forth in the charter of the Secure Communication of Network Properties (SCONEPRO) Working Group <xref target="SCONEPRO"/> while being in accordance with signaling design principles recommended in <xref target="RFC9419"/>.
    </t>
-   <t>
-      The distribution and impact of the exposed data to the performance gain for different algorithm needs to be further studied. This draft is to give a guidance to figure out what kind of data needs to be exposed during initial deployment of these mechanisms.
-   </t>
+
+   <section title="Technical Framework" anchor="sect-3-1">
+
+      <t>
+         Within the Mobile Network, 5G gNBs will regularly collect and process the network information included in the MoWIE framework. The Application Server must then discover the on-path gNB. This may be done by the gNB advertising itself to the Application Server by appending additional QUIC packets to existing connection; possible methods for this are discussed in <xref target="SADCDN"/>. The Application Server can then establish a QUIC connection with the gNB and request network information, both individually and at regular specified intervals. The gNB will then respond with the requested information, which the Application Server can use to optimize the application's behavior.
+      </t>
+
+      <t>
+         Note that the Application Server initiates the QUIC connection and thus the communication channel is under the application's control and aligns with their networking requirements. Care must be taken during initiation to ensure that the additional QUIC packets can not affect core application functionality. This process should be transparent and respect users privacy, adhering to the principles of minimal information exposure and user consent outlined in <xref target="RFC9419"/>.
+         The process should also allow for negotiation of signaling parameters to ensure trust between the Application Server and gNB. The Application Server may leverage QUIC's secure and authenticated transport layer to ensure the integrity and security of the communication.
+      </t>
+
+      <t>
+         Since the Application Server must pull network information from the gNB, the process is optional. The Application Server can choose to request only the network information desired, only when it is desired. ach additional QUIC connection must be lightweight to assist in scalability. Scalability will ultimately depend on the performance capabilities of gNBs. These additional QUIC connections may strain gNB when under heavy user load.
+      </t>
    </section>
 
-<section title="Standardization Considerations of MoWIE as an Extension to ALTO" anchor="sect-4">
-<t>
-    In 3GPP, network information exposure based on control plane mechanism is introduced in 4G and 5G systems.
-    In 3GPP Release 17, there is a work item named 5G_AIS (Advanced Interactive Services) which focuses on
-    QoS enhancements for interactive services including cloud gaming, XR, remote driving and real-time digital
-    twin. There is also continuous work in Release 18 XRM (XR and media services), which focuses on strengthening the
-    interaction and collaboration between applications and networks by improving the ability of the network information
-    exposure especially for XR and multimedia services. MoWIE is closedly related to this study as it can be a tool to
-    support exposure of 5G network status information. MoWIE can also support QoS prediction technologies which is
-    being applied to 5G-enabled automated driving which is being developed in 5GAA <xref target="PQoS_white_paper"/>
-, this solution can use network
-    information exposure to predict the future network changes to the application layer in order to be prepared for such
-    changes and make adaptations in application layer to improve the QoE of users.
-    There have been close collaboration between 5GAA and 3GPP to provide E2E solutions on this area.</t>
+   <section title="Security Considerations" anchor="sect-3-2">
+      <t>
+         Of key importance in this implementation is the security of the exchanged data. Once authentication between the Application Server and gNB has taken place, any exchanged data must be protected from becoming a vector for possible malicious action. Standard cryptographic techniques should be employed to ensure the confidentiality, integrity, and authenticity of the signaling data. Misuse of this signaling mechanism should be minimized through common security practices such as rate limiting.
+      </t>
+      <t>
+         The initial exposure of the gNB to the Application Server must take place prior to authentication between these two entities. This must be carefully managed to ensure that the gNB is not exposed to any malicious actors.
+      </t>
+   </section>
 
-<t>
-    Among these above mentioned work items,
-    one important way to support QoS (MoWIE and PQoS) enhancements is to expose the network status information to the application layer
-    and the application layer can take measures to adapt according to the network status information. The network information
-    can include the radio network statistics as has been elaborated in Section 4.1 and also the parameters specified
-    in <xref target="ALTO_METRICS"/>
-. In Section 4.1, the parameters which MoWIE proposes to expose can provide real-time status
-    and rich information about the wireless link which can be utilized by AI-ML (Machine Learning) algorithms
-    to predict the available network resources in the subsequent transmission opportunities, which can help the
-    application layer to adjust its traffic pattern or codec profile to optimize the user’s experience.
-    By mapping these parameters with the ALTO metrics which has been proposed or defining potential new ALTO metrics,
-    it is possible to extent current ALTO protocols to provide better support for real-time immersive services.
-    In ETSI MEC, RNIS <xref target="ETSI_MEC"/>
- has proposed to expose physical layer, Layer 2 and higher layer
-    parameters including 4G and 5G. There are some common parameters like RSRP, RSRQ and RSSI which MoWIE also proposes;
-    however, RNIS is based on the MEC architecture, and MoWIE is not restricted to MEC case.</t>
-
-<t>
-   It should be noticed that the previous mechanisms may also work on
-   IEEE 802.11 standards (e.g., EHT), helping SP to have a better
-   understanding for the network environment between AP and STAs.  Based
-   on the fact that 802.11 devices are working on unlicensed spectrums,
-   and easily influenced by adjacent unlicensed devices, duty cycles and
-   related CQI information (e.g., MCS, and bandwidth) are considered very important network information here.
-   Standardization Considerations of MoWIE as an Extension to ALTO MoWIE can be a
-   realistic, important extension to ALTO to serve the aforementioned
-   use cases, in the setting of the newer generation (5G) of cellular
-   network, which is a completely open IP based network where routers/
-   UPF with IP connectivity will be deployed much closer to the users.
-   One may consider not only the aforementioned cloud-based multimedia
-   applications, but also other latency sensitive applications such as
-   connected vehicles and automotive driving.</t>
-
-<t>
-   Extending ALTO with MoWIE, therefore, may allow ALTO to expose lower
-   layer network information to ensure higher application QoE for a wide
-   spectrum of applications.</t>
-
-<t>
-   One possible approach to standardizing the distribution of the
-   network information used in the evaluations is to send such
-   information as piggyback information in the data path.  One issue with
-   data path method is that MoWIE intends to convey more complex and rich
-   information than current methods.  To piggyback such complex and rich
-   information in the data path will consume significant data path
-   resource.  But the data path-based method can provide frequently changed
-   network information and it is technically simpler to synchronize the network
-   information and user data at the same time scale. Normally, there is
-   less user data in the uplink direction and the free "space"
-   within the MTU can be used to piggyback the network information to
-   the application, without the additional overhead of creating a second
-   communication channel between the application and network.  However,
-   the data path design may bring out more limited privacy management,
-   which is very important in MoWIE.  The application cannot trust the
-   network information if there is no message authentication mechanism
-   for the piggyback network information.  How the network inserts the
-   network information in the data packet is also challengeable since a
-   lot of transport layer protocol are encrypted and integration
-   protected.  Another method is to create an associated path aligned
-   with data path.  Like the ICMP for IP and RTCP for RTP, this second
-   path can be used to provide additional information associated with
-   the data path.  But creating such second path is a big change to
-   current widely used transport protocols and a lot of applications
-   also need to change, this second path is also challengeable.</t>
-
-
-<t>In this draft, we mainly discuss ALTO extension-based design in tackling with this problem.	
-    Specifically, the MoWIE extension will reuse existing ALTO mechanisms including
-    information resource directory, extensible performance metrics and calendaring, and unified properties.
-    Below is an overview of key considerations; security
-   considerations are in the following section.</t>
-
-<t>
-<list style="symbols">
-<t>Network information selection and binding consideration: Instead
-      of hardcoding only specific network information, a modular design
-      of MoWIE is an ability for an ALTO client to select only the
-      relevant information (e.g., cell DLOccupyPRBNum metric and UE MCS)
-      and then request correspondingly.  Existing ALTO information
-      resource directory is a starting point, but the design needs to be
-      generic," to provide abstraction for ease of use and extensibility.  The security mechanisms of the existing ALTO protocol should also be extended to enforce proper authorization.</t>
-
-<t>Compact network information encoding considerations: One benefit of
-      ALTO is its high-level JSON based encoding.  When the update
-      frequency increases, the existing base protocol and existing
-      extensions (in particular the SSE extension), however, may have
-      high bandwidth and processing overhead.  Hence, encoding and
-      processing overhead of MoWIE should be considered.</t>
-
-<t>Stability and reliability considerations: A key benefit of the
-      MoWIE extension is the ability to allow more flexible, better
-      coordinated control.  Any control mechanism, however, should
-      integrate fundamental overhead, stability, and reliability
-      mechanisms.</t>
-
-<t>Cost metrics considerations. In <xref target="ALTO_METRICS"/>
-, some cost metrics are
-        being standardized including throughput/bit rate, latency, priority, error rate,
-        jitter. These parameters can be linked with cost metrics in 5G network entities like network
-        exposure function (NEF) <xref target="TS23.501"/>
-        or application function (AF) <xref target="TS23.501"/>
-.
-        NEF or AF, which act as ALTO Clients, utilizing the network information exposure
-        capability provided by 3GPP standards, can request to expose some of the proposed parameters with
-        consideration of the ALTO performance metrics.</t>
-
-</list>
-</t>
-
-<t>With the better utilization of the 5G network, IETF ALTO can well benefit from MoWIE architecture and
-   QoE for the use cases of NAA applications can be achieved with the help of the convergence of 5G network
-   architecture and IETF ALTO. For example, it was shown in Figure 5-1 that the ALTO client can act as AF or
-   act as part of the functional module of AF to converge with the 5G system through the implementation in the AF.
-   It can receive the cellular-based network information through interaction with NEF, identify the ALTO server
-   using ALTO service discovery, and request available ALTO information prepared by the ALTO server using ALTO
-   Protocol <xref target="RFC7285"/>
-. The ALTO server can be implemented in other places through ALTO architecture and can interact
-   with the third parties (e.g. Content providers) via external interfaces. Furthermore, the ALTO server can aggregate
-   information from multiple functional entities to provide an abstract and unified view that can be more useful to
-   applications. Examples of other systems include (but are not limited to) static network configuration databases,
-   dynamic network information, routing protocols, provisioning policies, and interfaces to outside parties <xref target="RFC7285"/>
-.
-   Please note that these components shown in Figure 5-1 are out of IETF ALTO scope and are just for completeness to put here.
-   As a result, the ALTO Client can perform ALTO Service Discovery and interact with the ALTO server via ALTO Protocol to get
-   the ALTO information and ALTO metrics regarding the proposed parameters with the help of MoWIE that can be updated dynamically
-   based on network conditions from cellular aspects in Section 4.1.  It is noted that in addition to AF-based convergence
-   architecture which relies on control-plane interfaces e.g. N5/N33, MoWIE can also utilized user plane exposure via N6 or UPF
-   which makes network exposure mechanisms more comprehensive and flexisble.
-</t>
-
-<figure>
-<artwork><![CDATA[
-  +-----------------+  +------------+  +--------------+
-  | Dynamic Network |  |  Routing   |  | Provisioning |
-  |   Information   |  | protocols  |  |    policy    |
-  +---------+-------+  +------+-----+  +------+-------+
-            |                 |               |
-            +-----------------|---------------+
-                              |
-    +-----------+        +---------+
-    | External  |        |  ALTO   |
-    | Interface |--------| Server  |
-    +-----+-----+        +----+----+
-          |                   |
-          |                   | ALTO protocol
-          |                   |
-    +-------------+   +-------^--------+
-    | 3rd content |   | ALTO Client/AF |
-    |   provider  |   +----------------+
-    +-------------+           |---------------+
-           |                  |               |
-           |                  |N33            |N5
-           |             +----------+    +---------+
-           |             |   NEF    |    |   PCF   |
-           |             +----------+    +---------+
-           |                  |               |N7
-           |                  |---------------+
-           |                  |
-           |             +----------+ N11 +-------+
-           |             |   SMF    |-----|  AMF  |
-           |             +----------+     +-------+
-           |                  |N4             |N2
-           |                  |               |
-      +----------+            |               |
-      |   Data   |   N6  +-----------+  N3 +--------+   +------+
-      |  Network |-------|   UPF     |-----|  RAN   |---|  UE  |
-      +----------+       +-----------+     +--------+   +------+
-    Figure 5-1: Convergence of 5G network architecture and IETF ALTO
-]]></artwork>
-</figure>
-
-<t>By extending the exposure scope of network information beyond the cellular access,
-    ALTO can help improve the QoE of several applications running on endpoints located in cellular networks.
-<xref target="ALTO_USE_CASES"/>
- is work in progress that investigates use cases where the performances of these applications
-     can be further improved with abstracted network information and suitable transportation means provided by ALTO.
-      Additionally, upon reviewing the existing ALTO capabilities, it lists the ALTO features that need to be extended
-      or defined to support the presented use cases.
-</t>
-
+   <section title="Benefits and Drawbacks of On-path Signaling" anchor="sect-3-6">
+      <t>
+         On-path signaling is a powerful tool for enabling real-time network information exchange to enable dynamic NAAs. The primary benefit of an implementation with on-path signaling is that it greatly simplifies the challenge of associating a particular Application Server/Client Application pair with the relevant gNB and as a result, the relevant set of network information.
+      </t>
+      <t>
+         However, on-path signaling also presents several challenges. The mechanism of initial connection outlined above relies on the gNB piggybacking off the existing QUIC connection to advertise itself to the Application Server. To append additional packets on an UDP option or IP header would require support from both the Application Server and Client Application which may be difficult to ensure. The alternative of encapsulating the original payload within a new layer requires the gNB to be able to parse the original, encrypted payload, and may affect, for example, performance of the original core functionality. In both cases we are fighting the encryption and integration protection of the original QUIC connection.
+      </t>
+      <t>
+         Another challenge is the increased overhead associated with maintaining additional QUIC channels. As indicated earlier, in high-traffic scenarios this load may strain gNBs and due to the nature of on-path signaling, the gNB is the only entity that can provide the network information. This may create bottlenecks and limit the scalability of the solution.
+      </t>
+  </section>
 </section>
+
 
 <section title="IANA Considerations" anchor="sect-6">
 <t>
@@ -691,6 +529,37 @@
     &RFC7285;
 </references>
 <references title="Informative References">
+   <reference anchor="SCONEPRO" target="https://datatracker.ietf.org/doc/bofreq-joras-scone-protocl-the-topic-formerly-known-as-sadcdn/">
+      <front>
+          <title>Securing Ancillary Data for Communicating with Devices in the Network</title>
+          <author initials="M." surname="Joras" fullname="Matt Joras"/>
+          <date year="2024" month="February"/>
+          <workgroup>SCONEPRO</workgroup>
+      </front>
+  </reference>
+
+  <reference anchor="SADCDN" target="https://datatracker.ietf.org/doc/html/draft-joras-sadcdn-01">
+      <front>
+          <title>Secure Ancillary Data Communication for CDN Interactions</title>
+          <author initials="M." surname="Joras" fullname="Matt Joras"/>
+          <date year="2023" month="July"/>
+          <workgroup>SCONEPRO</workgroup>
+      </front>
+  </reference>
+
+  <reference anchor="RFC9419" target="https://datatracker.ietf.org/doc/rfc9419/">
+   <front>
+       <title>Considerations on Application - Network Collaboration Using Path Signals</title>
+       <author><organization>
+         T. Hardie, J. Arkko, T. Pauly, M. Kühlewind
+       </organization></author>
+       <date year="2023" month="July"/>
+       <workgroup>SCONEPRO</workgroup>
+   </front>
+</reference>
+
+
+
 <reference anchor="CS2P" target="https://doi.org/10.1145/2934872.2934898">
 <front>
 <title>CS2P: Improving Video Bitrate Selection and Adaptation with Data-Driven Throughput Prediction</title>

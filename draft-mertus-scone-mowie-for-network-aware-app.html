@@ -1598,7 +1598,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-on-path-signaling-using-qui" class="section-name selfRef">On-path Signaling using QUIC</a>
       </h2>
 <p id="section-3-1">
-      This section explores a possible implementation of the MoWIE framework using on-path signaling, or inband communication, within the QUIC protocol. We aim to achieve the properties set forth in the charter of the Secure Communication of Network Properties (SCONEPRO) Working Group <span>[<a href="#SCONEPRO" class="cite xref">SCONEPRO</a>]</span> while being in accordance with signaling design principles recommended in <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+      This section explores a possible implementation of the MoWIE framework using on-path signaling, or inband communication, within the QUIC protocol. We aim to achieve the properties set forth in the charter of the Secure Communication of Network Properties Working Group <span>[<a href="#SCONEPRO" class="cite xref">SCONEPRO</a>]</span> while being in accordance with signaling design principles recommended in <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="sect-3-1">
 <section id="section-3.1">
         <h3 id="name-technical-framework">
@@ -1610,7 +1610,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
          Note that the Application Server initiates the QUIC connection and thus the communication channel is under the application's control and aligns with their networking requirements. Care must be taken during initiation to ensure that the additional QUIC packets can not affect core application functionality. This process should be transparent and respect users privacy, adhering to the principles of minimal information exposure and user consent outlined in <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>.
          The process should also allow for negotiation of signaling parameters to ensure trust between the Application Server and gNB. The Application Server may leverage QUIC's secure and authenticated transport layer to ensure the integrity and security of the communication.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">
-         Since the Application Server must pull network information from the gNB, the process is optional. The Application Server can choose to request only the network information desired, only when it is desired. ach additional QUIC connection must be lightweight to assist in scalability. Scalability will ultimately depend on the performance capabilities of gNBs. These additional QUIC connections may strain gNB when under heavy user load.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+         Since the Application Server must pull network information from the gNB, the process is optional. The Application Server can choose to request only the network information desired, only when it is desired. Each additional QUIC connection must be lightweight to assist in scalability. Scalability will ultimately depend on the performance capabilities of gNBs. These additional QUIC connections may strain gNB when under heavy user load.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sect-3-2">
@@ -1674,7 +1674,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-benefits-and-drawbacks-of-of" class="section-name selfRef">Benefits and Drawbacks of Off-path Signaling</a>
         </h3>
 <p id="section-4.3-1">
-         Off-path signaling provides several benefits. First, by decoupling the network information delivery from the direct data path, we remove the potential for bottlenecks and scalability issues associated with on-path signaling. Also, regarding extensibility, off-path signaling allows for the integration of broader network information not available from on-path entities.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+         Off-path signaling provides several benefits. First, by decoupling the network information delivery from the direct data path, we reduce the potential for bottlenecks and scalability issues associated with on-path signaling. Also, regarding extensibility, off-path signaling allows for the integration of broader network information not available to on-path entities.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.3-2">
          Although off-path signaling exposes sensitive information to a new, non-essential entity, this security risk is offset by removing the necessity to mess with an existing QUIC connection, which itself introduced a risk to the original data path. We also observe that apply an off-path approach greatly reduces the possibility that this signaling mechanism will affect the core functionality of the application.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
 <p id="section-4.3-3">

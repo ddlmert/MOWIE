@@ -438,9 +438,9 @@ Table of Contents
    This section explores a possible implementation of the MoWIE
    framework using on-path signaling, or inband communication, within
    the QUIC protocol.  We aim to achieve the properties set forth in the
-   charter of the Secure Communication of Network Properties (SCONEPRO)
-   Working Group [SCONEPRO] while being in accordance with signaling
-   design principles recommended in [RFC9419].
+   charter of the Secure Communication of Network Properties Working
+   Group [SCONEPRO] while being in accordance with signaling design
+   principles recommended in [RFC9419].
 
 3.1.  Technical Framework
 
@@ -470,8 +470,8 @@ Table of Contents
    Since the Application Server must pull network information from the
    gNB, the process is optional.  The Application Server can choose to
    request only the network information desired, only when it is
-   desired. ach additional QUIC connection must be lightweight to assist
-   in scalability.  Scalability will ultimately depend on the
+   desired.  Each additional QUIC connection must be lightweight to
+   assist in scalability.  Scalability will ultimately depend on the
    performance capabilities of gNBs.  These additional QUIC connections
    may strain gNB when under heavy user load.
 
@@ -575,11 +575,11 @@ Table of Contents
 4.3.  Benefits and Drawbacks of Off-path Signaling
 
    Off-path signaling provides several benefits.  First, by decoupling
-   the network information delivery from the direct data path, we remove
+   the network information delivery from the direct data path, we reduce
    the potential for bottlenecks and scalability issues associated with
    on-path signaling.  Also, regarding extensibility, off-path signaling
    allows for the integration of broader network information not
-   available from on-path entities.
+   available to on-path entities.
 
    Although off-path signaling exposes sensitive information to a new,
    non-essential entity, this security risk is offset by removing the

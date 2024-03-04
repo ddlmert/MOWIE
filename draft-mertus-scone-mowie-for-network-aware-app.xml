@@ -491,6 +491,48 @@
   </section>
 </section>
 
+<section title="Off-path Signaling using QUIC" anchor="sect-4">
+   <t>
+      We will now consider an alternative methodology implementing the MoWIE framework utilizing off-path signaling, again within the QUIC protocol. This approach diverges from inband communication discussed above.
+   </t>
+
+   <section title="Technical Framework" anchor="sect-4-1">
+      <t>
+         In order to implement off-path signaling we must introduce an additional third-party node outside of the direct data path. This node will be responsible for collecting and processing the network information included in the MoWIE framework. Discovery of the relevant off-path node by the Application Server may be facilitated by reverse DNS lookups or service discovery protocols. Once a connection is established, the Application Server can request network information for a particular Application Client. The off-path node must then discover the bottleneck gNB for the given Application Client in order to determine the relevant network information before sending a response. This process must be repeated periodically to ensure the Application Server is always communicating with the relevant off-path entity; the dynamic nature of mobile networks, where clients frequently move and switch gNBs, necessitates this.
+      </t>
+      <t>
+         In order to identify the relevant gNB, the off-path node must discover the full path from the Application Server to the Client. This path trace may be accomplished through a variety of methods depending on the network infrastructure. In the context of 5G, the off-path node may leverage 5G Service Based Architecture (SBA) capabilities defined in 3GPP <xref target="TS23.501"/>. This may involve querying core network functions such the Access and Mobility Management Function (AMF) or the Unified Data Management (UDM) function for UE session information, including the current server gNB. Once the path has been established, the off-path node must periodically monitor changes in network topology as conditions change or, more likely, the user moves.
+      </t>
+      <t>
+         Communication between the Application Server and the off-path node would be secured and authenticated by QUIC. Just as before, off-path nodes may apply rate limiting and other security measures to protect against abuse.
+      </t>
+   </section>
+
+   <section title="Security Considerations" anchor="sect-4-2">
+      <t>
+         The introduction of the off-path node brings several security challenges. Even when applying a principle of minimal information exposure, the off-path node must have access to detailed network path information, which implies certain user privacy concerns. It is essential to implement strict retention policies to ensure sensitive data is discarded as soon as it is no longer needed. This concern provides additional emphasis to the need for robust authentication and encryption between the Application Server and the off-path node.
+      </t>
+   </section>
+
+   <section title="Benefits and Drawbacks of Off-path Signaling" anchor="sect-4-3">
+      <t>
+         Off-path signaling provides several benefits. First, by decoupling the network information delivery from the direct data path, we remove the potential for bottlenecks and scalability issues associated with on-path signaling. Also, regarding extensibility, off-path signaling allows for the integration of broader network information not available from on-path entities.
+      </t>
+      <t>
+         Although off-path signaling exposes sensitive information to a new, non-essential entity, this security risk is offset by removing the necessity to mess with an existing QUIC connection, which itself introduced a risk to the original data path. We also observe that apply an off-path approach greatly reduces the possibility that this signaling mechanism will affect the core functionality of the application.
+      </t>
+      <t>
+         Just as gNBs in the on-path approach, the off-path node is a potential bottleneck and point of failure. Robust error handling and failover mechanisms, similar to those required for gNBs, must be designed to ensure resilience. These strategies may be applied if the off-path node becomes unavailable for any reason. Since the off-path node is not responsible for the original data path, the potential for bottlenecks is reduced.
+      </t>
+      <t>
+         One final drawback of this approach is that it requires the periodic rediscovery of off-path nodes to accommodate client mobility. In the on-path approach this is handled implicitly by the gNB. This adds additional overhead and may impact scalability.
+      </t>
+   </section>
+
+
+</section>
+
+
 
 <section title="IANA Considerations" anchor="sect-6">
 <t>

@@ -2,10 +2,12 @@
 
 
 
-ALTO                                                              Y. Jia
-Internet-Draft                                                  Y. Zhang
-Intended status: Standards Track                                 Tencent
-Expires: 2 September 2024                                     Y. R. Yang
+SCONE                                                        D.M. Mertus
+Internet-Draft                                           Yale University
+Intended status: Standards Track                                  Y. Jia
+Expires: 2 September 2024                                       Y. Zhang
+                                                                 Tencent
+                                                              Y. R. Yang
                                                          Yale University
                                                                    G. Li
                                                                     CMRI
@@ -22,29 +24,26 @@ Expires: 2 September 2024                                     Y. R. Yang
 
 Abstract
 
-   TODO: ADD ABSTRACT ONCE DRAFT IS COMPLETE - BASE OFF OF THE
-   FOLLOWING: With the deployment of 5G networks, cloud-based
-   interactive services such as cloud gaming have gained substantial
-   attention.  To ensure users' quality of experience (QoE), a cloud
-   interactive service may require not only high bandwidth (e.g., high-
-   resolution media transmission) but also low delay (e.g., low latency
-   and low lagging).  However, the quality perceived by a user with
-   mobile and wireless device may vary, as a function of many factors,
-   and unhandled changes can substantially compromise the user's QoE.
-   In this document, we investigate network-aware applications (NAA),
-   which realize cloud-based interactive services with improved QoE, by
+   With the deployment of 5G networks, cloud-based interactive services
+   such as cloud gaming have gained substantial attention.  To ensure
+   users' quality of experience (QoE), a cloud interactive service may
+   require not only high bandwidth (e.g., high-resolution media
+   transmission) but also low delay (e.g., low latency and low lagging).
+   However, the quality perceived by a user of a mobile and wireless
+   device may vary widely as a function of many factors, and unhandled
+   changes can substantially compromise the user's QoE.  In this
+   document, we investigate network-aware applications (NAA), which
+   realize cloud-based interactive services with improved QoE, by
    efficient utilization of a solution named Mobile and Wireless
    Information Exposure (MoWIE).  In particular, this document
    demonstrates, through realistic evaluations, that mobile network
    information such as MCS (Modulation and Coding Scheme) can
-   effectively expose the dynamicity of the underlying network and can
-   be made available to applications through MoWIE; using such an
+   effectively expose the dynamics of the underlying network and can be
+   made available to applications through MoWIE; using such an
    information, the applications can then adapt key control knobs such
    as media codec schemes, encapsulation, and application layer
-   processing to minimize QoE distortion.  Based on the evaluations, we
-   discuss how the MoWIE features can define extensions of the ALTO
-   protocol, to expose more lower-layer and finer grain network
-   dynamics.
+   processing to minimize QoE distortion.  Following evaluations we give
+   a cursory overview of the design space for implementing MoWIE
 
 Status of This Memo
 
@@ -80,27 +79,28 @@ Copyright Notice
 Table of Contents
 
    1.  Current Status of Network-Aware Applications
-   2.  MoWIE Architecture and Applications
-     2.1.  Architecture of MoWIE
+   2.  MoWIE Introduction and Use Cases
+     2.1.  Basic Idea of MoWIE
      2.2.  Standard NAA Use Cases for MoWIE
      2.3.  Preliminary Evaluations and Benefits
        2.3.1.  RAN-assisted TCP optimization
        2.3.2.  ROI Detection
        2.3.3.  Adaptive Bitrate
-   3.  On-path Signaling using QUIC
-     3.1.  Technical Framework
-     3.2.  Security Considerations
-     3.3.  Benefits and Drawbacks of On-path Signaling
-   4.  Off-path Signaling using QUIC
-     4.1.  Technical Framework
+   3.  Signaling for MoWIE Information
+   4.  On-path Signaling
+     4.1.  Key Components
      4.2.  Security Considerations
-     4.3.  Benefits and Drawbacks of Off-path Signaling
-   5.  IANA Considerations
-   6.  Security Considerations
-   7.  Acknowledgments
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+     4.3.  Benefits and Challenges
+   5.  Off-path Signaling
+     5.1.  Key Components
+     5.2.  Security Considerations
+     5.3.  Benefits and Challenges
+   6.  IANA Considerations
+   7.  Security Considerations
+   8.  Acknowledgments
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Authors' Addresses
 
 1.  Current Status of Network-Aware Applications
@@ -207,23 +207,23 @@ Table of Contents
    cellular radio network information by networks to applications, thus
    helping service providers achieve better policy control and improve
    user experience.  The benefits of the MoWIE concept/solution have
-   been experimentally evaluated in several use cases, detailed in
-   Section XXXXX TO EDIT.
+   been experimentally evaluated in several use cases, detailed in the
+   following section.
 
-2.  MoWIE Architecture and Applications
+2.  MoWIE Introduction and Use Cases
 
-2.1.  Architecture of MoWIE
+2.1.  Basic Idea of MoWIE
 
    The fundamental idea of MoWIE is to provide on-demand and periodic
    network information from the network to applications, enhancing
-   policy control and user experience.  The architecture comprises three
-   core components: the Client Application, the Mobile Network, and the
-   Application Server.  Raw data collected from the Mobile Network is
-   processed and exposed to the Application Server.  This server can
-   then request network information and use this information to optimize
-   application functions in the Client Application like bit rate,
-   latency, and jitter.  Network information provided by MoWIE includes
-   the following:
+   policy control and user experience.  This basic conceptualization
+   includes the following key components: the Client Application, the
+   Mobile Network, and the Application Server.  Raw data collected from
+   the Mobile Network is processed and exposed to the Application
+   Server.  This server can then request network information and use
+   this information to optimize application functions in the Client
+   Application like bit rate, latency, and jitter.  Network information
+   provided by MoWIE includes the following:
 
    Cell level Information:
 
@@ -433,49 +433,132 @@ Table of Contents
    We clearly observe a significant reduction in lagging rates across
    all scenarios.
 
-3.  On-path Signaling using QUIC
+3.  Signaling for MoWIE Information
 
-   This section explores a possible implementation of the MoWIE
-   framework using on-path signaling, or inband communication, within
-   the QUIC protocol.  We aim to achieve the properties set forth in the
-   charter of the Secure Communication of Network Properties Working
-   Group [SCONEPRO] while being in accordance with signaling design
-   principles recommended in [RFC9419].
+   Thus far we have outlined the information that MoWIE provides.  Now
+   we will consider how this information can be exposed to the
+   application.  We identify two distinct approaches:
 
-3.1.  Technical Framework
+   *  On-path signaling: this refers to the process of exposing network
+      information to the application through the same path as the
+      application's data; this is also known as inband communication or
+      simply, path signaling [RFC9419].
 
-   Within the Mobile Network, 5G gNBs will regularly collect and process
-   the network information included in the MoWIE framework.  The
-   Application Server must then discover the on-path gNB.  This may be
-   done by the gNB advertising itself to the Application Server by
-   appending additional QUIC packets to existing connection; possible
-   methods for this are discussed in [SADCDN].  The Application Server
-   can then establish a QUIC connection with the gNB and request network
-   information, both individually and at regular specified intervals.
-   The gNB will then respond with the requested information, which the
-   Application Server can use to optimize the application's behavior.
+   *  Off-path signaling: this refers to the process of exposing network
+      information to the application through a separate path.
 
-   Note that the Application Server initiates the QUIC connection and
-   thus the communication channel is under the application's control and
-   aligns with their networking requirements.  Care must be taken during
-   initiation to ensure that the additional QUIC packets can not affect
-   core application functionality.  This process should be transparent
-   and respect users privacy, adhering to the principles of minimal
-   information exposure and user consent outlined in [RFC9419].  The
-   process should also allow for negotiation of signaling parameters to
-   ensure trust between the Application Server and gNB.  The Application
-   Server may leverage QUIC's secure and authenticated transport layer
-   to ensure the integrity and security of the communication.
+   For each of these approach we establish key high-level components and
+   introduce a discussion of the design space.  We also list possible
+   security considerations as well as the benefits and drawbacks of each
+   approach.
 
-   Since the Application Server must pull network information from the
-   gNB, the process is optional.  The Application Server can choose to
-   request only the network information desired, only when it is
-   desired.  Each additional QUIC connection must be lightweight to
-   assist in scalability.  Scalability will ultimately depend on the
-   performance capabilities of gNBs.  These additional QUIC connections
-   may strain gNB when under heavy user load.
+4.  On-path Signaling
 
-3.2.  Security Considerations
+   In our discussion of on-path signaling we maintain the following
+   entities from our initial discussion on MoWIE: the Application
+   Server, the Mobile Network, and the Client Application.  From the
+   Mobile Network we derive the the gNB which will serve as the on-path
+   entity which exposes network information to the application.
+
+   The initial structure is as follows:
+
+        Client Application          gNB              Application Server
+           +---+             +--------------+         +----------------+
+           |   |-------------|              |---------|                |
+           |   |             |              |         |                |
+           |   |             |              |         |                |
+           +---+             +--------------+         +----------------+
+                    ------------
+                 application connection
+
+
+4.1.  Key Components
+
+   We identify the following key components for achieving MoWIE via on-
+   path signaling
+
+   *  Collecting and processing network information: the gNB can
+      regularly collect and process the network information included in
+      the MoWIE framework. gNBs are well positioned to collect this
+      information given their central role in the 5G network.  They may
+      leverage various aspects of the 5G architecture to collect this
+      information, such as the RAN, the core network, and the UE.
+
+   *  Discovering the on-path gNB by the Application Server: this may be
+      done by the gNB advertising itself to the Application Server in
+      several manners.  One method is to encapsulate the original
+      payload within a new layer.  Another option is to inject
+      additional packets on an UDP option or IP header.  These methods
+      are discussed in [SADCDN].  Additional methods of interleaving
+      with the original payload may also be considered.
+
+   *  Discovering the on-path gNB by the Application Client: if the gNB
+      is able to associate packets outgoing to the Application Server
+      with incoming packets to the Application Client, similar methods
+      to to those used previously may be applied.  Else, this challenge
+      may be addressed through direct communication between the
+      Application Server and the gNB.  Complications arise due to the
+      dynamic nature of mobile IPs and the potential for NATs to be
+      present in the path.
+
+   *  Communication between the application and the gNB: after
+      discovery, the Application Server or Client can establish a
+      separate QUIC connection with the gNB and request network
+      information, both individually and at regular specified intervals.
+      The gNB will then respond with the requested information, which
+      the Application Server can use to optimize the application's
+      behavior.  Alternatively, the gNB may be able able to piggyback
+      network information on packets running through the existing QUIC
+      connection.
+
+   *  Performance Isolation: to preserve the integrity of the
+      application function, the original QUIC connection should not be
+      affected by the additional signaling.  This may have implications
+      for the gNB's ability to parse and alter hte original payload
+      given the performance impact.
+
+   *  Security and privacy: all signaling must utilize as little
+      information as possible to achieve the desired result and all
+      information exposure should be transparent to both the users to
+      adhere to the principles of minimal information exposure and user
+      consent outlined in [RFC9419].  The process should also allow for
+      negotiation of signaling parameters to ensure trust between the
+      Application Server and gNB.  The application may leverage QUIC's
+      secure and authenticated transport layer to ensure the integrity
+      and security of the communication.
+
+   *  Scalability: the process should be lightweight to assist in
+      scalability.  Scalability will ultimately depend on the
+      performance capabilities of gNBs.  These additional QUIC
+      connections may strain gNB when under heavy user load.
+
+   *  Application control: the process should be under the application's
+      control in accordance with [RFC9419] and align with their
+      networking requirements.  We prefer starting with a pull model to
+      ensure information exposure is entirely optional and under the
+      application's control.  The application can choose to request only
+      the network information desired, only when it is desired.
+
+   *  Robustness: the process should be robust to network changes and
+      failures.  The process should also be able to handle the dynamic
+      nature of mobile networks, where clients frequently move and
+      switch gNBs.  If the existing direct data path changes, the
+      signaling path should be able to adapt to the new path.
+
+   Once connection has been established we can visualize the structure
+   as follows:
+
+         Client Application          gNB              Application Server
+            +---+             +--------------+         +----------------+
+            |   |-------------|              |---------|                |
+            |   |+++++++++++++|              |+++++++++|                |
+            |   |             |              |         |                |
+            +---+             +--------------+         +----------------+
+                     ------------           +++++++++
+               application  connection   MoWIE  connection
+
+
+4.2.  Security Considerations
 
    Of key importance in this implementation is the security of the
    exchanged data.  Once authentication between the Application Server
@@ -491,7 +574,7 @@ Table of Contents
    be carefully managed to ensure that the gNB is not exposed to any
    malicious actors.
 
-3.3.  Benefits and Drawbacks of On-path Signaling
+4.3.  Benefits and Challenges
 
    On-path signaling is a powerful tool for enabling real-time network
    information exchange to enable dynamic NAAs.  The primary benefit of
@@ -500,17 +583,15 @@ Table of Contents
    Server/Client Application pair with the relevant gNB and as a result,
    the relevant set of network information.
 
-   However, on-path signaling also presents several challenges.  The
-   mechanism of initial connection outlined above relies on the gNB
-   piggybacking off the existing QUIC connection to advertise itself to
-   the Application Server.  To append additional packets on an UDP
-   option or IP header would require support from both the Application
-   Server and Client Application which may be difficult to ensure.  The
-   alternative of encapsulating the original payload within a new layer
-   requires the gNB to be able to parse the original, encrypted payload,
-   and may affect, for example, performance of the original core
-   functionality.  In both cases we are fighting the encryption and
-   integration protection of the original QUIC connection.
+   However, on-path signaling also presents several challenges.  Any
+   mechanism of initial connection relying on the gNB piggybacking off
+   the existing QUIC connections fights the encryption and integration
+   protection of the original QUIC connection.  The gNB would need to be
+   able to parse the original, encrypted payload, and may affect, for
+   example, performance of the original core functionality.  The
+   alternative of appending additional packets on an UDP option or IP
+   header would require support from both the Application Server and
+   Client Application which may be difficult to ensure.
 
    Another challenge is the increased overhead associated with
    maintaining additional QUIC channels.  As indicated earlier, in high-
@@ -519,60 +600,137 @@ Table of Contents
    network information.  This may create bottlenecks and limit the
    scalability of the solution.
 
-4.  Off-path Signaling using QUIC
+5.  Off-path Signaling
 
-   We will now consider an alternative methodology implementing the
-   MoWIE framework utilizing off-path signaling, again within the QUIC
-   protocol.  This approach diverges from inband communication discussed
-   above.
+   In this discussion on off-path signaling, we continue with the
+   entities previously established: the Application Server, the Mobile
+   Network, and the Client Application.  Contrary to the on-path
+   scenario, here we introduce a third-party node, called the
+   Information Server, which stands outside the direct data flow and is
+   tasked with providing network information to the application.
 
-4.1.  Technical Framework
+   The initial structure is as follows:
 
-   In order to implement off-path signaling we must introduce an
-   additional third-party node outside of the direct data path.  This
-   node will be responsible for collecting and processing the network
-   information included in the MoWIE framework.  Discovery of the
-   relevant off-path node by the Application Server may be facilitated
-   by reverse DNS lookups or service discovery protocols.  Once a
-   connection is established, the Application Server can request network
-   information for a particular Application Client.  The off-path node
-   must then discover the bottleneck gNB for the given Application
-   Client in order to determine the relevant network information before
-   sending a response.  This process must be repeated periodically to
-   ensure the Application Server is always communicating with the
-   relevant off-path entity; the dynamic nature of mobile networks,
-   where clients frequently move and switch gNBs, necessitates this.
+                              Information Server
+                              +--------------+
+                              |              |
+                              |              |
+                              |              |
+                              +--------------+
 
-   In order to identify the relevant gNB, the off-path node must
-   discover the full path from the Application Server to the Client.
-   This path trace may be accomplished through a variety of methods
-   depending on the network infrastructure.  In the context of 5G, the
-   off-path node may leverage 5G Service Based Architecture (SBA)
-   capabilities defined in 3GPP [TS23.501].  This may involve querying
-   core network functions such the Access and Mobility Management
-   Function (AMF) or the Unified Data Management (UDM) function for UE
-   session information, including the current server gNB.  Once the path
-   has been established, the off-path node must periodically monitor
-   changes in network topology as conditions change or, more likely, the
-   user moves.
+         Client Application          gNB              Application Server
+            +---+             +--------------+         +----------------+
+            |   |-------------|              |---------|                |
+            |   |             |              |         |                |
+            |   |             |              |         |                |
+            +---+             +--------------+         +----------------+
+                     ------------
+                  application connection
 
-   Communication between the Application Server and the off-path node
-   would be secured and authenticated by QUIC.  Just as before, off-path
-   nodes may apply rate limiting and other security measures to protect
-   against abuse.
 
-4.2.  Security Considerations
+5.1.  Key Components
 
-   The introduction of the off-path node brings several security
+   We identify the following key components for achieving MoWIE via off-
+   path signaling:
+
+   *  Collecting and processing network information: the Information
+      Server is tasked with aggregating and processing network
+      information pertinent to the MoWIE framework.  This entity may
+      collate data from various sources within the 5G network,
+      leveraging information from the RAN, core network elements, and
+      potentially direct reports from UEs or gNBs.
+
+   *  Discovering the relevant Information Server by the Application
+      Server or Client: on both server and client side the application
+      faces the challenge of locating the relevant Information Service
+      for acquiring network information that impacts the application's
+      performance.  Application of service discovery protocols or
+      reverse DNS lookups may fail to solve this issue due to the
+      dynamic nature of mobile networks and the potential for NATs to be
+      present in the path.
+
+   *  Discovering the network path and relevant cellular nodes for the
+      application: the Information Server must ascertain the network
+      path from the Application Server to the Client, identifying key
+      network nodes like gNBs.  This might involve leveraging 5G
+      network's Service Based Architecture to query information from
+      core network functions such as the AMF.
+
+   *  Communication between the application and the Information Server:
+      following discovery, a new connection may be established between
+      Information Server and the Application Server of Client for the
+      exchange of network information.  QUIC may be used to secure and
+      authenticate this communication.  This setup allows for the
+      periodical or on-demand request and retrieval of network data
+      relevant to optimizing application behavior.
+
+   *  Security and privacy: just as in the on-path model, all signaling
+      must utilize as little information as possible to achieve the
+      desired result and all information exposure should be transparent
+      to both the users to adhere to the principles of minimal
+      information exposure and user consent.  The process should also
+      allow for negotiation of signaling parameters to ensure trust
+      between the application and Information Server.  Encryption and
+      authentication should be applied for all communications.  In order
+      to facilitate widespread adoption, Information Server must be
+      secure.
+
+   *  Scalability: again, the design must ensure that the off-path
+      signaling mechanism does not adversely impact the primary
+      application's functionality.  A dynamic association between
+      Information Servers and network regions may be necessary to ensure
+      that the system scales efficiently with the number of users and
+      fluctuating network conditions without overburdening the
+      Information Server.
+
+   *  Application control and user consent: similar to the on-path
+      model, off-path signaling should be initiated under the
+      application's control.  We again prefer starting with a pull model
+      to ensure information exposure is entirely optional and under the
+      application's control.  The application can choose to request only
+      the network information desired, only when it is desired.
+
+   *  Robustness: given the dynamic nature of mobile networks, the off-
+      path signaling process must be capable of adapting to changes such
+      as network reconfigurations, user mobility, and varying network
+      conditions.  The function of discovering the relevant Information
+      Server and network path must be repeated periodically to ensure
+      the application server is always communicating with the relevant
+      Information Server and receiving the most up-to-date network
+      information.
+
+   When in use, the off-path model can be visualized as follows:
+
+                              Information Server
+                              +--------------+
+                        - - - |              | - - -
+                      /       |              |       \
+                    /         |              |        \
+                  /            +--------------+        \
+                /                                       \
+         Client Application          gNB              Application Server
+            +---+             +--------------+         +----------------+
+            |   |-------------|              |---------|                |
+            |   |             |              |         |                |
+            |   |             |              |         |                |
+            +---+             +--------------+         +----------------+
+                     ------------              - - - - - - - -
+                  application connection       MoWIE connection
+
+
+5.2.  Security Considerations
+
+   The introduction of the Information Server brings several security
    challenges.  Even when applying a principle of minimal information
-   exposure, the off-path node must have access to detailed network path
-   information, which implies certain user privacy concerns.  It is
+   exposure, the Information Server must have access to detailed network
+   path information, which implies certain user privacy concerns.  It is
    essential to implement strict retention policies to ensure sensitive
    data is discarded as soon as it is no longer needed.  This concern
    provides additional emphasis to the need for robust authentication
-   and encryption between the Application Server and the off-path node.
+   and encryption between the Application Server and the Information
+   Server.
 
-4.3.  Benefits and Drawbacks of Off-path Signaling
+5.3.  Benefits and Challenges
 
    Off-path signaling provides several benefits.  First, by decoupling
    the network information delivery from the direct data path, we reduce
@@ -585,11 +743,11 @@ Table of Contents
    non-essential entity, this security risk is offset by removing the
    necessity to mess with an existing QUIC connection, which itself
    introduced a risk to the original data path.  We also observe that
-   apply an off-path approach greatly reduces the possibility that this
+   applying an off-path approach may reduce the possibility that this
    signaling mechanism will affect the core functionality of the
    application.
 
-   Just as gNBs in the on-path approach, the off-path node is a
+   Just as gNBs in the on-path approach, the Information Server is a
    potential bottleneck and point of failure.  Robust error handling and
    failover mechanisms, similar to those required for gNBs, must be
    designed to ensure resilience.  These strategies may be applied if
@@ -597,16 +755,16 @@ Table of Contents
    path node is not responsible for the original data path, the
    potential for bottlenecks is reduced.
 
-   One final drawback of this approach is that it requires the periodic
-   rediscovery of off-path nodes to accommodate client mobility.  In the
-   on-path approach this is handled implicitly by the gNB.  This adds
-   additional overhead and may impact scalability.
+   One final drawback of this approach is that it explicitly requires
+   the periodic rediscovery of Information Server to accommodate client
+   mobility.  In the on-path approach this may be handled implicitly by
+   the gNB.  This adds additional overhead and may impact scalability.
 
-5.  IANA Considerations
+6.  IANA Considerations
 
    This document has no actions for IANA.
 
-6.  Security Considerations
+7.  Security Considerations
 
    The collection, distribution of MoWIE information should consider the
    security requirements on information privacy and information
@@ -620,15 +778,15 @@ Table of Contents
    provided to right applications.  These security requirements can be
    implemented by the TLS and other security mechanisms.
 
-7.  Acknowledgments
+8.  Acknowledgments
 
    The authors would like to thank Huang Wei and Mohamed Boucadair for
    their contribution and technical review comments to the previous
    versions of this draft.
 
-8.  References
+9.  References
 
-8.1.  Normative References
+9.1.  Normative References
 
    [RFC2474]  Nichols, K., Blake, S., Baker, F., and D. Black,
               "Definition of the Differentiated Services Field (DS
@@ -647,7 +805,7 @@ Table of Contents
               RFC 7285, DOI 10.17487/RFC7285, September 2014,
               <https://www.rfc-editor.org/info/rfc7285>.
 
-8.2.  Informative References
+9.2.  Informative References
 
    [ALTO_METRICS]
               "Internet-Draft, draft-ietf-alto-performance-metrics-09",
@@ -800,6 +958,14 @@ Table of Contents
               SpecificationDetails.aspx?specificationId=3197>.
 
 Authors' Addresses
+
+   Daniel Mertus
+   Yale University
+   Unit 404, 367 Elm Street
+   New Haven, CT 06511
+   United States of America
+   Email: daniel.mertus@yale.edu
+
 
    Yuhang Jia
    Tencent
